@@ -3,7 +3,7 @@
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "connect";
+$database = "iconnect";
 
 $__name__ = "iconnect";
 

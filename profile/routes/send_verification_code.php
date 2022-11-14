@@ -27,10 +27,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         message(false,"Verification code must contain 6 digits");
     }
 
-    $session_id = $_SESSION["random_id"];
+    $session_id = $_SESSION["request_id"];
 
     $validate_code = mysqli_query($con,"
-        SELECT * FROM `tbl_verificationcode` WHERE `session` = '$session_id' AND `code` = '$code'
+        SELECT * FROM `tbl_verificationcode` WHERE `session` = '$session_id'
     ");
     if($validate_code){
         if(hasResult($validate_code)){
@@ -38,9 +38,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = $data["id"];
             $status = $data["status"];
             if($status == 0){
-
-                unset($_SESSION["random_id"]);
-
 
                 $update = mysqli_query($con,"
                     UPDATE
@@ -59,7 +56,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     WHERE
                         `id` = $u_id;
                 ");
+                unset($_SESSION["request_id"]);
 
+                
                 if($update){
                     message(true,"You complete the step 1 verification.");
                 }else{

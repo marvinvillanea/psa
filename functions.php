@@ -202,3 +202,116 @@ function getFileExtension($e){
     return $fileActualExt;
 }
 
+function moviderGetBalance($con,$userid){
+    try {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('POST', 'https://api.movider.co/v1/balance', [
+            'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
+                'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
+            ]
+        ]);
+      
+        $data = json_decode($response->getBody());
+        savelog($con,$userid,$response->getBody());
+        if(isset($data->amount)){
+            return $data->amount > 0.100 ? true : false;
+         }
+        return false;
+    } catch(\Exception $e) {
+        $data = $e->getMessage();
+        savelog($con,$userid,$data);
+        return false;
+    }
+    
+}
+
+/*
+$con = connection database
+$userid = userid
+$data = array() details
+*/ 
+function moviderSendVerify($con,$userid, $details){
+
+   try{
+        $client = new \GuzzleHttp\Client();
+        $form_params =[
+            'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
+            'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
+            'from' => 'iConnect',
+            'code_length' => "6",
+            'language' => 'en-us',
+            'pin_expire' => "300",
+            'to' => '+63'.$details["to"]
+        ];
+        savelog($con,$userid,json_encode($form_params));
+        $response = $client->request('POST', 'https://api.movider.co/v1/verify', [
+            'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => $form_params
+        ]);
+        // $this->savelog($response->getBody());
+        savelog($con,$userid,$response->getBody());
+        $data = json_decode($response->getBody());
+        if(isset($data->request_id)){
+            saveToken($con,$data->request_id);
+            $_SESSION["request_id"] = $data->request_id;
+            return true;
+        }
+        return false;
+    } catch(\Exception $e) {
+        $data = $e->getMessage();
+        savelog($con,$userid,$data);
+        return false;
+    }
+    
+}
+
+/*
+$con = connection database
+$userid = userid
+$data = array() details
+*/ 
+function moviderVerifyCode($con,$userid, $details){
+
+    $client = new \GuzzleHttp\Client();
+    $form_params =[
+        'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
+        'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
+        'request_id' =>  $details["request_id"],
+        'code' => $details["code"],
+    ];
+    savelog($con,$userid,json_encode($form_params));
+    $response = $client->request('POST', 'https://api.movider.co/v1/verify/acknowledge', [
+        'headers' => [
+            'accept' => 'application/json',
+            'content-type' => 'application/x-www-form-urlencoded',
+        ],
+        'form_params' => $form_params
+    ]);
+    // $this->savelog($response->getBody());
+    savelog($con,$userid,$response->getBody());
+    $data = json_decode($response->getBody());
+    // if(isset($data->remaining_balance)){
+    //     return true;
+    // }
+    // return false;
+    
+}
+
+
+function savelog($con,$id,$message){
+     mysqli_query($con,"INSERT INTO `tbl_sms_logs`(`receiverid`,`message`) VALUES($id,'".$message."') ");
+}
+
+
+function saveToken($con, $session) {
+    mysqli_query($con,"INSERT INTO `tbl_verificationcode`(`session`) VALUES('".$session."') ");
+}

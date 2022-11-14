@@ -1,8 +1,11 @@
 <?php
 session_start();
+
+require_once '../vendor/autoload.php';
 require_once '../config.php';
 require_once '../functions.php';
 require_once '../session.php';
+
 
 if(!$islogin){
     navigate("../");
@@ -23,38 +26,50 @@ if(!form("page") && value("page") !== ""){
                 $_SESSION["random_id"] = $session;
             }
 
+            $session = '';
+            if(isset($_SESSION["request_id"])){
+                $session = $_SESSION["request_id"];
+            }
+            echo '<script>alert('.$session.')</script>';
             $check_session=  mysqli_query($con,"SELECT * FROM `tbl_verificationcode` WHERE `session` = '$session'");
             if(hasResult($check_session)){
                 $already_sent = true;
             }else{
 
-                $generated_code = rand(100000,999999);
+                // $generated_code = rand(100000,999999);
+            
+                // $sms_message = "LocalMJob \nVerification code: $generated_code";
+             
+                // clicksend_sms($u_cnum,$sms_message);
+                $checkBalance = moviderGetBalance($con,$u_id);
+                if($checkBalance){
+                    $details = [
+                        "to" => $u_cnum,
+                    ];
+                    $moviderSendVerify = moviderSendVerify($con,$u_id,$details);
 
-                $sms_message = "LocalMJob \nVerification code: $generated_code";
+                }
+                // $sms_log = mysqli_query($con,"
+                //     INSERT INTO `tbl_sms_logs`(
+                //         `receiverid`,
+                //         `message`
+                //     )
+                //     VALUES(
+                //         $u_id,
+                //         '$sms_message'
+                //     )
+                // ");
 
-                clicksend_sms($u_cnum,$sms_message);
-
-                $sms_log = mysqli_query($con,"
-                    INSERT INTO `tbl_sms_logs`(
-                        `receiverid`,
-                        `message`
-                    )
-                    VALUES(
-                        $u_id,
-                        '$sms_message'
-                    )
-                ");
-
-                $create_new_session = mysqli_query($con,"
-                    INSERT INTO `tbl_verificationcode`(
-                        `session`,
-                        `code`
-                    )
-                    VALUES(
-                        '$session',
-                        '$generated_code'
-                    )
-                ");
+                // $create_new_session = mysqli_query($con,"
+                //     INSERT INTO `tbl_verificationcode`(
+                //         `session`,
+                //         `code`
+                //     )
+                //     VALUES(
+                //         '$session',
+                //         '$generated_code'
+                //     )
+                // ");
 
                 $already_sent = false;
             }
