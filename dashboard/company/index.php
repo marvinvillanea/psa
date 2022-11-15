@@ -68,6 +68,7 @@ if($islogin){
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="notify_style.css">
     <!-- javascript -->
     <script src="js/index.js" defer></script>
     <script src="js/post_job.js" defer></script>
@@ -97,8 +98,30 @@ if($islogin){
                     <a href="?page=hire">
                         Hire
                     </a>
+                    <ul class="notification-drop">
+                    <li class="item">
+                    <button type="button" style="border: none; background: none;" onclick="showNotification()">
+                        <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">
+                            <?php echo countNotify($con, $u_id); ?>
+                            </span> 
+                        </button>
+                          <ul>
+                            <?php
+                            $load_data_notificaiton = mysqli_query($con,"SELECT * FROM `tbl_notification` WHERE user_id = $u_id and `status` = 0 order by created_at desc limit 5");
+                            if(hasResult($load_data_notificaiton)){
+                                while($row = mysqli_fetch_assoc($load_data_notificaiton)){
+                                    echo "<li id='".$row["id"]."' onclick='updateNotification(this.id)' >".$row["description"]."</li>";
+                                }  
+                            }else{
+                                echo "<li>No data..</li>";
+                            }
+                             ?>
+                          </ul>
+                        </li>
+                      </ul>
                 </div>
             </div>
+            
             <div class="navigation">
                 <button class="btn_user">
                     <i class="fa fa-user"></i>
@@ -319,11 +342,11 @@ if($islogin){
 
 
                                                     <?php }elseif($row["status"] == "3"){?>
-                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" >
+                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" name='hired'>
                                                             <i class="fa fa-check"></i>
                                                             HIRE
                                                         </button>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline" disabled>
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline"  name='declined' disabled>
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
@@ -550,3 +573,33 @@ if($islogin){
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+function showNotification(){
+    $('.notification-drop .item').find('ul').toggle();
+}
+
+function updateNotification(id){
+    $.ajax({
+        url : "../../controller/NotificationAction.php",
+        method: "post",
+        data : {id:id},
+        success: (res) => {
+            console.log(res);
+            if(res == "3" || res == "2"){
+                if(res == "3"){
+                    setTimeout(() => {
+                        window.location.href="./profile/?page=general_information"
+                    }, 300);
+                } else {
+                    setTimeout(() => {
+                        window.location.href="/iconnect/dashboard/company/?page=hire&sub=applicants"
+                    }, 300);
+                }
+            } else {
+                location.reload();
+            }
+        }
+    });
+}
+</script>

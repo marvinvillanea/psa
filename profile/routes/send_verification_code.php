@@ -1,5 +1,6 @@
 <?php 
 session_start();
+require_once '../../vendor/autoload.php';
 require_once '../../config.php';
 require_once '../../functions.php';
 require_once '../../session.php';
@@ -39,31 +40,42 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $status = $data["status"];
             if($status == 0){
 
-                $update = mysqli_query($con,"
-                    UPDATE
-                        `tbl_verificationcode`
-                    SET
-                        `status` = 1
-                    WHERE
-                        `session` = '$session_id'
-                ");
+                $details = [
+                    'request_id' => $session_id,
+                    'code' =>$code,
+                ];
+                $verify = moviderVerifyCode($con,$u_id, $details);
+                if($verify) {
+                    $update = mysqli_query($con,"
+                        UPDATE
+                            `tbl_verificationcode`
+                        SET
+                            `status` = 1
+                        WHERE
+                            `session` = '$session_id'
+                    ");
 
-                $update = mysqli_query($con,"
-                    UPDATE
-                        `tbl_accounts`
-                    SET
-                        `verification_state` = 1
-                    WHERE
-                        `id` = $u_id;
-                ");
-                unset($_SESSION["request_id"]);
-
-                
-                if($update){
-                    message(true,"You complete the step 1 verification.");
-                }else{
+                    $update = mysqli_query($con,"
+                        UPDATE
+                            `tbl_accounts`
+                        SET
+                            `verification_state` = 1
+                        WHERE
+                            `id` = $u_id;
+                    ");
+                    unset($_SESSION["request_id"]);
+                    if($update){
+                        message(true,"You complete the step 1 verification.");
+                    }else{
+                        message(false,"Error in the server, Please try again later.");
+                    }
+                } else {
                     message(false,"Error in the server, Please try again later.");
                 }
+                
+
+                
+                
 
             }else{
                 message(false,"The verification you've enter is already used.");

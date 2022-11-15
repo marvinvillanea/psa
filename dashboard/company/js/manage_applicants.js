@@ -1,7 +1,8 @@
 $(document).ready(() => {
     $(".btn_hired").each((i,e)=>{
         $(e).click(()=>{
-            var id = e.dataset.id
+            var id = e.dataset.id;
+            var action = e.name == 'hired' ? 2 : 3;
             Swal.fire({
               icon: 'question',
               title: 'Hire?',
@@ -15,7 +16,7 @@ $(document).ready(() => {
                   method: "post",
                   data : {
                     id : id,
-                    action: 2
+                    action: action
                   },
                   success: (res) => {
                       console.log(res)

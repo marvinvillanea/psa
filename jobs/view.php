@@ -21,6 +21,7 @@ if(form("id")){
         tbl_company.c_name,
         tbl_company.c_address,
         tbl_company.c_cnum,
+        tbl_company.userid,
         tbl_accounts.firstname,
         tbl_accounts.lastname,
         tbl_jobs.j_name,
@@ -70,6 +71,8 @@ if(form("id")){
                     $job_id
                 )
                 ");
+                $sms_message = ucwords($data["lastname"].', '.$data["firstname"]). ", Applying for  ".ucwords($data["j_name"]);
+                createNotify($con, $data["userid"], $sms_message, 0);
                 $already_submited = false;
             }
         }else{
@@ -99,7 +102,7 @@ if(form("id")){
     <link rel="stylesheet" href="./view.css">
     <link rel="stylesheet" href="../verify.css">
     <link rel="stylesheet" href="../header.css">
-
+    <link rel="stylesheet" href="../notify_style.css">
     <!-- javascript -->
     <script src="./js/report_company.js" defer></script>
 </head>
@@ -203,3 +206,27 @@ if(form("id")){
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+function showNotification(){
+    $('.notification-drop .item').find('ul').toggle();
+}
+
+function updateNotification(id){
+    $.ajax({
+        url : "../controller/NotificationAction.php",
+        method: "post",
+        data : {id:id},
+        success: (res) => {
+            console.log(res);
+            if(res == "SUCCESS"){
+                 setTimeout(() => {
+                    window.location.href="../profile/?page=general_information"
+                }, 300);
+            } else {
+                location.reload();
+            }
+        }
+    });
+}
+</script>

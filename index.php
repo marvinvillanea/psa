@@ -25,6 +25,7 @@ if($islogin){
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="verify.css">
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="notify_style.css">
 </head>
 <body>
     <div class="main">
@@ -43,3 +44,32 @@ if($islogin){
     </div>
 </body>
 </html>
+<script type="text/javascript">
+function showNotification(){
+    $('.notification-drop .item').find('ul').toggle();
+}
+
+function updateNotification(id){
+    $.ajax({
+        url : "controller/NotificationAction.php",
+        method: "post",
+        data : {id:id},
+        success: (res) => {
+            console.log(res);
+            if(res == "3" || res == "2"){
+                if(res == "3"){
+                    setTimeout(() => {
+                        window.location.href="./profile/?page=general_information"
+                    }, 300);
+                } else {
+                    setTimeout(() => {
+                        window.location.href="/iconnect/dashboard/company/?page=hire&sub=applicants"
+                    }, 300);
+                }
+            } else {
+                location.reload();
+            }
+        }
+    });
+}
+</script>

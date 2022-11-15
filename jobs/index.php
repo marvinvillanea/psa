@@ -99,6 +99,7 @@ if(form("search")){
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../verify.css">
     <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="../notify_style.css">
 </head>
 <body>
     <div class="main">
@@ -163,3 +164,27 @@ if(form("search")){
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+function showNotification(){
+    $('.notification-drop .item').find('ul').toggle();
+}
+
+function updateNotification(id){
+    $.ajax({
+        url : "../controller/NotificationAction.php",
+        method: "post",
+        data : {id:id},
+        success: (res) => {
+            console.log(res);
+            if(res == "SUCCESS"){
+                 setTimeout(() => {
+                    window.location.href="../profile/?page=general_information"
+                }, 300);
+            } else {
+                location.reload();
+            }
+        }
+    });
+}
+</script>

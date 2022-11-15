@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+require_once '../../../vendor/autoload.php';
 require_once '../../../config.php';
 require_once '../../../functions.php';
 require_once '../../../session.php';
@@ -48,12 +49,20 @@ if($islogin){
     $cnum = $info["cnum"];
 
     if($action == "2"){
-        $sms_message = "You're hired, Hello $fullname, We see your resume and you have good potential for this kind of job $job_name , Please contact us on $company_cnum. - $company_name.";
+        $sms_message = 'You`re hired, Hello '.$fullname.', We see your resume and you have good potential for this kind of job '.$job_name.' , Please contact us on '.$company_cnum.'. - '.$company_name.'.';
+
+        createNotify($con, $info["applicantsid"], $sms_message, 0);
     }elseif($action == "3"){
-        $sms_message = "Hello $fullname, Your application for this position $job_name was declined - $company_name.";
+        $sms_message = 'Hello '.$fullname.', Your application for this position '.$job_name.' was declined - '.$company_name.'.';
+        createNotify($con, $info["applicantsid"], $sms_message, 0);
     }
 
-    clicksend_sms($cnum,$sms_message);
+    // clicksend_sms($cnum,$sms_message);
+    $details = [
+        'to' => $cnum,
+        'text' => $sms_message,
+    ];
+    moviderSentSMS($con,$info["applicantsid"], $details);
 
     $update_status = mysqli_query($con,"UPDATE `tbl_applicants` SET `status` = $action WHERE `tbl_applicants`.`id` = $id");
     if($update_status){

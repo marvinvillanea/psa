@@ -281,28 +281,35 @@ $data = array() details
 */ 
 function moviderVerifyCode($con,$userid, $details){
 
-    $client = new \GuzzleHttp\Client();
-    $form_params =[
-        'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
-        'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
-        'request_id' =>  $details["request_id"],
-        'code' => $details["code"],
-    ];
-    savelog($con,$userid,json_encode($form_params));
-    $response = $client->request('POST', 'https://api.movider.co/v1/verify/acknowledge', [
-        'headers' => [
-            'accept' => 'application/json',
-            'content-type' => 'application/x-www-form-urlencoded',
-        ],
-        'form_params' => $form_params
-    ]);
-    // $this->savelog($response->getBody());
-    savelog($con,$userid,$response->getBody());
-    $data = json_decode($response->getBody());
-    // if(isset($data->remaining_balance)){
-    //     return true;
-    // }
-    // return false;
+    try{
+        $client = new \GuzzleHttp\Client();
+        $form_params =[
+            'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
+            'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
+            'request_id' =>  $details["request_id"],
+            'code' => $details["code"],
+        ];
+        savelog($con,$userid,json_encode($form_params));
+        $response = $client->request('POST', 'https://api.movider.co/v1/verify/acknowledge', [
+            'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => $form_params
+        ]);
+        savelog($con,$userid,$response->getBody());
+        $data = json_decode($response->getBody());
+        if(isset($data->request_id)){
+            return true;
+        }
+        return false;
+
+     } catch(\Exception $e) {
+        $data = $e->getMessage();
+        savelog($con,$userid,$data);
+        return false;
+    }
+    
     
 }
 
@@ -314,4 +321,61 @@ function savelog($con,$id,$message){
 
 function saveToken($con, $session) {
     mysqli_query($con,"INSERT INTO `tbl_verificationcode`(`session`) VALUES('".$session."') ");
+}
+
+function createNotify($con, $user_id, $description, $status){
+    mysqli_query($con,"INSERT INTO `tbl_notification`(`user_id`,`description`, `status`) 
+        VALUES(".$user_id.",'".$description."',".$status.") ");
+}
+
+
+/*
+$con = connection database
+$userid = userid
+$data = array() details
+*/ 
+function moviderSentSMS($con,$userid, $details){
+
+    try{
+        $client = new \GuzzleHttp\Client();
+        $form_params =[
+            'api_key' => '2H7GtWOeyWYMff0XzK7en5zEdy6',
+            'api_secret' => 'm0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB',
+            'from' => 'iConnect',
+            'text' => $details["text"],
+            'to' => '+63'.$details["to"]
+        ];
+        savelog($con,$userid,json_encode($form_params));
+        $response = $client->request('POST', 'https://api.movider.co/v1/sms', [
+            'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => $form_params
+        ]);
+        savelog($con,$userid,$response->getBody());
+        $data = json_decode($response->getBody());
+        if(isset($data->remaining_balance)){
+            return true;
+        }
+        return false;
+
+     } catch(\Exception $e) {
+        $data = $e->getMessage();
+        savelog($con,$userid,$data);
+        return false;
+    }
+    
+    
+}
+
+function countNotify( $con,$userid) {
+    $load_data = mysqli_query($con,"SELECT count(id) as total_notify FROM `tbl_notification` WHERE user_id = $userid and `status` = 0 order by created_at desc");
+    if(hasResult($load_data)){
+        $data = mysqli_fetch_assoc($load_data);
+        $count = $data["total_notify"];
+        return $count;        
+    }else{
+        return 0;
+    }
 }

@@ -30,8 +30,8 @@ if(!form("page") && value("page") !== ""){
             if(isset($_SESSION["request_id"])){
                 $session = $_SESSION["request_id"];
             }
-            echo '<script>alert('.$session.')</script>';
-            $check_session=  mysqli_query($con,"SELECT * FROM `tbl_verificationcode` WHERE `session` = '$session'");
+            // echo '<script>alert('.$session.')</script>';
+            $check_session=  mysqli_query($con,"SELECT *, now() - created_at AS expired_at FROM `tbl_verificationcode` WHERE `session` = '$session' HAVING expired_at < 300 ");
             if(hasResult($check_session)){
                 $already_sent = true;
             }else{
@@ -103,6 +103,7 @@ if(!form("page") && value("page") !== ""){
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../verify.css">
     <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="../notify_style.css">
 </head>
 <body>
     <div class="main">
@@ -337,3 +338,27 @@ if(!form("page") && value("page") !== ""){
     </div>
 </body>
 </html>
+
+<script type="text/javascript">
+function showNotification(){
+    $('.notification-drop .item').find('ul').toggle();
+}
+
+function updateNotification(id){
+    $.ajax({
+        url : "../controller/NotificationAction.php",
+        method: "post",
+        data : {id:id},
+        success: (res) => {
+            console.log(res);
+            if(res == "SUCCESS"){
+                 setTimeout(() => {
+                    window.location.href="../profile/?page=general_information"
+                }, 300);
+            } else {
+                location.reload();
+            }
+        }
+    });
+}
+</script>
