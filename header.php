@@ -45,7 +45,7 @@
             <?php if($u_type == 1){?>
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-                <a href="/<?= $__name__ ?>">CONTACT US</a>
+                <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
                 <a href="/<?= $__name__ ?>/dashboard/company" class="nav_a">
                     DASHBOARD
@@ -53,7 +53,7 @@
             <?php }elseif($u_type == 2){?>
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-                <a href="/<?= $__name__ ?>">CONTACT US</a>
+                <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
                 <a href="/<?= $__name__ ?>/dashboard/company" class="nav_a">
                     DASHBOARD
@@ -67,7 +67,7 @@
         <?php }else{?>
             <a href="/<?= $__name__ ?>">HOME</a>
             <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-            <a href="/<?= $__name__ ?>/">CONTACT US</a>
+            <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
             <a href="/<?= $__name__ ?>/auth?a=already">LOGIN</a>
             <a href="/<?= $__name__ ?>/auth?a=join" class="nav_a">
                 GET STARTED

@@ -78,6 +78,56 @@ if($islogin){
     <script src="js/update_general.js" defer></script>
     <script src="js/update_company.js" defer></script>
     <script src="../ckeditor/ckeditor.js"></script>
+    <style type="text/css">
+        /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 1% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 65%; /* Could be more or less, depending on screen size */
+  position: relative;
+  border-radius: 10px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*.iframe_center { 
+
+    margin: 0px auto;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+ }*/
+
+    </style>
 </head>
 <body>
     <div class="main">
@@ -282,6 +332,7 @@ if($islogin){
                                         <a href="./?page=hire&sub=applicants&filter=hired" class="<?= ($filter=="hired") ? "active" : "" ?>">HIRED</a>
                                         <a href="./?page=hire&sub=applicants&filter=declined" class="<?= ($filter=="declined") ? "active" : "" ?>">DECLINED</a>
                                     </div>
+                                   
                                 </div>
                                 <div class="container_body">
                                     <?php if(hasResult($load_applicants)){?>
@@ -301,10 +352,10 @@ if($islogin){
                                                         <span class="label">Full name : </span>
                                                         <?= $row['firstname']; ?> <?= $row['lastname']; ?>
                                                     </p>
-                                                    <p class="posted_at">
+                                                   <!--  <p class="posted_at">
                                                         <span class="label">Birthday : </span>
                                                         <?= date("m/d/Y",strtotime($row["bday"]))?>
-                                                    </p>
+                                                    </p> -->
                                                     <p class="posted_at">
                                                         <span class="label">Age : </span>
                                                         <?= $row["age"]?>
@@ -320,26 +371,27 @@ if($islogin){
                                                 </div>
                                                 <div class="box_buttons">
                                                     <?php if($row["status"] == "2") {?>
-                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" disabled>
+                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" name='hired' disabled>
                                                             <i class="fa fa-check"></i>
                                                             HIRE
                                                         </button>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline" name='declined'>
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                       <!--  <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
                                                         </a>
-
+ -->
 
                                                               <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>EMAIL CONFIRMATION
                                                         </a>
 
-
-
+                                                       <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
 
                                                     <?php }elseif($row["status"] == "3"){?>
                                                         <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" name='hired'>
@@ -350,23 +402,30 @@ if($islogin){
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                        <!-- <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
-                                                        </a>
+                                                        </a> -->
+                                                          <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
+
                                                     <?php }else{?>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_hired">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_hired" name='hired'>
                                                             <i class="fa fa-check"></i>
                                                             HIRE
                                                         </button>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline" name='declined'>
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                       <!--  <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
-                                                        </a>
+                                                        </a> -->
+                                                         <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
                                                     <?php }?>
                                                 </div>
                                             </div>
@@ -571,6 +630,22 @@ if($islogin){
             <?php }else{ navigate("./"); }?>
         </div>
     </div>
+
+<!-- modal scroll -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+   <div class="iframe_center">
+        <iframe src="" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)" id="documentsDetails" >
+    </iframe>
+   </div>
+  </div>
+
+</div>
+
 </body>
 </html>
 
@@ -602,4 +677,50 @@ function updateNotification(id){
         }
     });
 }
+
+// // Get the modal
+// var modal = document.getElementById("myModal");
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks on the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+//   document.getElementById("documentsDetails").src = btn.value;
+// }
+
+ function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+
+
+function showModal(documentDetails, getID){
+    // // Get the modal
+     document.getElementById("documentsDetails").src = '';
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+    // // Get the button that opens the modal
+    var btn = document.getElementById(getID);
+
+    // // When the user clicks on the button, open the modal
+    document.getElementById("documentsDetails").src = documentDetails;
+
+}
+
+function closeModal(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+
 </script>
