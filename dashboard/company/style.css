@@ -556,3 +556,13 @@ input[type=file]{
 .body_image .btn_upload_picture{
     width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+   #body_page_dashboard {
+        padding: 18px;
+    }
+
+   
+
+}

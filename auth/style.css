@@ -37,8 +37,8 @@ span.company_name{
     height: 50px;
 }
 .header_logo p{
-    font-size: 1.2rem;
-    font-weight:500;
+  /*  font-size: 1.2rem;
+    font-weight:500;*/
 }
 /* main_login */
 #main_login{
@@ -102,7 +102,6 @@ span.company_name{
     text-decoration: underline;
 }
 #main_login .body form .already{
-    font-size: .9rem;
     margin-top: 1rem;
     margin-bottom: .3rem;
     text-align: center;
@@ -265,4 +264,30 @@ span.company_name{
 }
 #main_step_2 .body form button:hover{
     background: #016464;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #main_login .body { 
+        padding: 40px;
+    }
+    #main_login .body form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+    }
+
+    #main_login .body form label {
+         font-size: 2rem; 
+    }
+
+    #main_step_1 .body h1 {
+        text-align: center;
+    }
+
+    #main_step_1 .body .showcase .type img {
+        width: 100px;
+        height: 100px;
+    }
 }
