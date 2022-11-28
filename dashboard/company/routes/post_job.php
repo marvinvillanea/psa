@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once '../../../vendor/autoload.php';
 require_once '../../../config.php';
 require_once '../../../functions.php';
 require_once '../../../session.php';
@@ -13,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $minimum_salary = mysqli_value($con,"minimum_salary");
     $maximum_salary = mysqli_value($con,"maximum_salary");
     $currency_symbol = mysqli_value($con,"currency_symbol");
-    $description = mysqli_value($con,"description");
+    $description = $_POST["description"];
 
     function message($status,$message){
         $msg = array(
@@ -72,15 +73,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         FROM
             `tbl_accounts`
         WHERE
-            `type` = 3 AND `department` = '$c_department'
+            `type` = 3 AND `department` = '$c_department' and verification_state = 2
     ");
 
     
     while($row = mysqli_fetch_assoc($select_all_applicants)){
+
         $cnum = $row["cnum"];
         $firstname = $row["firstname"];
         $sms_message = "LocalMJob \n Hello $firstname, $c_name has new open job $position_name.";
-        clicksend_sms($cnum,$sms_message);
+        createNotify($con, $row["id"], $sms_message, 0);
+
+        $details = [
+            'to' => $cnum,
+            'text' => $sms_message,
+        ];
+        moviderSentSMS($con,$row["id"], $details);
+        // clicksend_sms($cnum,$sms_message);
     }
 
 

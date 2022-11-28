@@ -234,3 +234,26 @@ input[type=file]{
     color: white !important;
     background: #673DE6;
 }
+
+.client_menu { 
+    display: none;
+ }
+
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .btn_upload_picture {
+     font-size: .8rem; 
+    }
+    .image_center_body {
+        text-align: center;
+    }
+
+
+    .client_menu { 
+        display: block;
+     }
+
+}

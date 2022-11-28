@@ -59,8 +59,9 @@ if(form("search")){
             tbl_jobs
         INNER JOIN tbl_company ON tbl_company.userid = tbl_jobs.userid
         INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_jobs.userid
-        WHERE $u_age >= tbl_jobs.j_age
+        
         ");
+        // WHERE   tbl_jobs.j_age >=  $u_age
     }else{
         $result_query = mysqli_query($con,"
         SELECT

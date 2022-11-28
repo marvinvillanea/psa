@@ -8,6 +8,7 @@
     </a>
 </div>
 <?php } ?>
+
 <div class="header">
     <div class="text">
         <a href="/<?= $__name__ ?>" class="header_logo">
@@ -62,6 +63,8 @@
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
                 <a href="/<?= $__name__ ?>/profile">PROFILE</a>
+                <a href="/<?= $__name__ ?>/profile/?page=password" class="client_menu">Password</a>   
+                <a href="/<?= $__name__ ?>/profile/?page=resume"  class="client_menu">Resume</a>   
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
             <?php } ?>
         <?php }else{?>

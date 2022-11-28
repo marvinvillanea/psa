@@ -67,6 +67,8 @@ if($islogin){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="notify_style.css">
     <!-- javascript -->
@@ -133,12 +135,14 @@ if($islogin){
     <div class="main">
         <div class="header">
             <div class="box">
-                <a href="../../" class="header_logo">
-                    <img src="../../assets/logo.png" alt="logo">
-                    <p>LocalMJob</p>
-                </a>
+                <div class="mobile_lang">
+                    <a href="../../" class="header_logo">
+                        <img src="../../assets/logo.png" alt="logo">
+                        <p>LocalMJob</p>
+                    </a>
+                </div>
                 <span></span>
-                <div class="navigation">
+                <div class="navigation desktop_icon_profile">
                     <a href="../../">
                         Home
                     </a>
@@ -149,51 +153,102 @@ if($islogin){
                         Hire
                     </a>
                     <ul class="notification-drop">
-                    <li class="item">
-                    <button type="button" style="border: none; background: none;" onclick="showNotification()">
-                        <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">
-                            <?php echo countNotify($con, $u_id); ?>
-                            </span> 
+                        <li class="item" style="border:none;">
+                        <button type="button" style="border: none; background: none;" onclick="showNotification()">
+                            <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">
+                                <?php echo countNotify($con, $u_id); ?>
+                                </span> 
                         </button>
-                          <ul>
-                            <?php
-                            $load_data_notificaiton = mysqli_query($con,"SELECT * FROM `tbl_notification` WHERE user_id = $u_id and `status` = 0 order by created_at desc limit 5");
-                            if(hasResult($load_data_notificaiton)){
-                                while($row = mysqli_fetch_assoc($load_data_notificaiton)){
-                                    echo "<li id='".$row["id"]."' onclick='updateNotification(this.id)' >".$row["description"]."</li>";
-                                }  
-                            }else{
-                                echo "<li>No data..</li>";
-                            }
-                             ?>
-                          </ul>
+                              <ul>
+                                <?php
+                                $load_data_notificaiton = mysqli_query($con,"SELECT * FROM `tbl_notification` WHERE user_id = $u_id and `status` = 0 order by created_at desc limit 5");
+                                if(hasResult($load_data_notificaiton)){
+                                    while($row = mysqli_fetch_assoc($load_data_notificaiton)){
+                                        echo "<li id='".$row["id"]."' onclick='updateNotification(this.id)' >".$row["description"]."</li>";
+                                    }  
+                                }else{
+                                    echo "<li>No data..</li>";
+                                }
+                                 ?>
+                              </ul>
                         </li>
                       </ul>
+                       
+
                 </div>
+                
+
+
             </div>
-            
-            <div class="navigation">
+
+
+
+            <div class="navigation desktop_icon_profile">
                 <button class="btn_user">
                     <i class="fa fa-user"></i>
                 </button>
             </div>
+            <div class="navigation mobile_icon_profile">
+                <button class="btn_user">
+                        <i class="fa fa-bars"></i>
+                </button>
+            </div>
         </div>
+
+
         <div class="body" id="body_page_<?= $page ?>">
             <div class="profile_box" style="display:none">
-                <div class="profile_box_header">
-                    <p class="profile_name">
-                        <?= $u_fname." ". $u_lname ?>
-                    </p>
-                    <p class="profile_email">
-                        <?= $u_email ?>
-                    </p>
+                
+                
+                <div class="hambuger_menu_desktop">
+                    <div class="profile_box_header">
+                        <p class="profile_name">
+                            <?= $u_fname." ". $u_lname ?>
+                        </p>
+                        <p class="profile_email">
+                            <?= $u_email ?>
+                        </p>
+                    </div>
+                    <div class="profile_box_body">
+                        <a href="./?page=profile">Account Information</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_body">
-                    <a href="./?page=profile">Account Information</a>
+                <div class="hambuger_menu_mobile">
+                    <div class="profile_box_footer">
+                        <a href="../../" class="btn_logout">Home</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=dashboard" class="btn_logout">Dashboard</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire" class="btn_logout">Hire</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire&sub=list" class="btn_logout">List</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="?page=hire&sub=postajob" class="btn_logout">Job</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="?page=hire&sub=applicants" class="btn_logout">Applicants</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=general_information" class="btn_logout">Account Information</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=company_information" class="btn_logout">Company Information</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=password" class="btn_logout">Password</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_footer">
-                    <a href="../../logout.php" class="btn_logout">Logout</a>
-                </div>
+                
             </div>
             <?php if($page == "dashboard"){?>
                 <h2>Hi, <?= $u_fname." ". $u_lname ?> 👋</h2>
@@ -298,7 +353,7 @@ if($islogin){
                                         <div class="field">
                                             <select name="currency_symbol" id="currency_symbol">
                                                 <option value="" <?= ($update) ? "" : "selected" ?> disabled>Currency symbol</option>
-                                                <option value="₱" <?= ($update && $data["j_currency_symbol"] == "₱") ? "selected" : "" ?> >PH Peso</option>
+                                                <option value="₱" <?= ($update && $data["j_currency_symbol"] == "₱") ? "selected" : ""  ?>  selected >PH Peso</option>
                                                 <option value="$" <?= ($update && $data["j_currency_symbol"] == "$") ? "selected" : "" ?> >US Dollars</option>
                                             </select>
                                         </div>
@@ -384,10 +439,12 @@ if($islogin){
                                                             DOWNLOAD RESUME
                                                         </a>
  -->
-
-                                                              <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" class="button" download>
-                                                            <i class="fa fa-file-text-o"></i>EMAIL CONFIRMATION
-                                                        </a>
+                                                        <button class="button">
+                                                             <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank"  download style="color: white;">
+                                                                    <i class="fa fa-file-text-o"></i>EMAIL CONFIRMATION
+                                                                </a>
+                                                        </button>
+                                                       
 
                                                        <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
                                                                 <i class="fa fa-file-text-o"></i>   VIEW RESUME
