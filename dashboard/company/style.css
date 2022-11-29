@@ -569,6 +569,8 @@ input[type=file]{
     display: none;
 }
 
+
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
    #body_page_dashboard {
@@ -627,5 +629,10 @@ input[type=file]{
     
     #body_page_profile .sidebar {
         display: none;
+    }
+
+    .modal  .modal-content {
+     
+        width: 90%;
     }
 }

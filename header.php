@@ -12,7 +12,7 @@
 <div class="header">
     <div class="text">
         <a href="/<?= $__name__ ?>" class="header_logo">
-            <img src="/<?= $__name__ ?>/assets/logo.png" alt="logo">
+            <img src="/<?= $__name__ ?>/assets/peso_logo_one.gif" alt="logo">
             <p>LocalMJob</p>
         </a>
         <label for="navigation-toggle" class="toggle-nav-btn">

@@ -143,7 +143,7 @@ if($islogin){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DASHBOARD</title>
-    <link rel="icon" href="../../assets/logo.png" >
+    <link rel="icon" href="../../assets/peso_logo_one.gif" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -164,7 +164,7 @@ if($islogin){
         <div class="header">
             <div class="box">
                 <a href="../../" class="header_logo">
-                    <img src="../../assets/logo.png" alt="logo">
+                    <img src="../../assets/peso_logo_one.gif" alt="logo">
                     <p>CONNECT</p>
                 </a>
                 <span></span>

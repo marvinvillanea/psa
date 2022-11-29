@@ -63,7 +63,7 @@ if($islogin){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DASHBOARD</title>
-    <link rel="icon" href="../../assets/logo.png" >
+    <link rel="icon" href="../../assets/peso_logo_one.gif" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -121,23 +121,35 @@ if($islogin){
   cursor: pointer;
 }
 
-/*.iframe_center { 
 
-    margin: 0px auto;
-    position: relative;
-    text-align: center;
-    padding: 10px;
- }*/
 
+
+.content {
+   width: 100%;
+   margin: 0px auto;
+}
+
+.embed-container {
+/*   height: 0;*/
+   width: 100%;
+   overflow: hidden;
+   position: relative;
+}
+
+.embed-container iframe {
+   width: 100%;
+
+}
     </style>
 </head>
 <body>
+
     <div class="main">
         <div class="header">
             <div class="box">
                 <div class="mobile_lang">
                     <a href="../../" class="header_logo">
-                        <img src="../../assets/logo.png" alt="logo">
+                        <img src="../../assets/peso_logo_one.gif" alt="logo">
                         <p>LocalMJob</p>
                     </a>
                 </div>
@@ -342,7 +354,10 @@ if($islogin){
                                             <input type="text" name="position_name" value="<?= ($update) ? $data["j_name"] : "" ?>" id="position_name" placeholder="Position name">
                                         </div>
                                         <div class="field">
-                                            <input type="number" name="position_age" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age" placeholder="Qualification age">
+                                            <input type="number" name="position_age" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age" placeholder="Qualification age From">
+                                        </div>
+                                         <div class="field">
+                                            <input type="number" name="position_age_to" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age_to" placeholder="Qualification age To">
                                         </div>
                                         <div class="field">
                                             <input type="number" name="minimum_salary" value="<?= ($update) ? $data["j_min"] : "" ?>"  id="minimum_salary" placeholder="Minimum salary">
@@ -352,9 +367,7 @@ if($islogin){
                                         </div>
                                         <div class="field">
                                             <select name="currency_symbol" id="currency_symbol">
-                                                <option value="" <?= ($update) ? "" : "selected" ?> disabled>Currency symbol</option>
                                                 <option value="₱" <?= ($update && $data["j_currency_symbol"] == "₱") ? "selected" : ""  ?>  selected >PH Peso</option>
-                                                <option value="$" <?= ($update && $data["j_currency_symbol"] == "$") ? "selected" : "" ?> >US Dollars</option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -695,13 +708,20 @@ if($islogin){
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-   <div class="iframe_center">
-        <iframe src="" width="100%" frameborder="0" scrolling="no" onload="resizeIframe(this)" id="documentsDetails" >
-    </iframe>
-   </div>
+    
+    <div class="content">
+        <div class="embed-container">
+           <iframe src="" width="560"
+      height="315" frameborder="0"  onload="resizeIframe(this)" id="documentsDetails"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" loading="lazy">
+             </iframe>
+       </div>
+    </div>
+
   </div>
 
 </div>
+
+
 
 </body>
 </html>
