@@ -65,7 +65,7 @@ a{
 }
 .body_search{
     display: flex;
-    height: 100vh;
+/*    height: 100vh;*/
     flex-direction: column;
 }
 .body_search .container_search{
@@ -177,4 +177,37 @@ a{
 .body_search .content .recommended .container_body .not_found p{
     font-size:2rem;
     color: rgb(95, 103, 216);
+}
+
+.client_menu { 
+    display: none;
+ }
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .body_search .content {
+        padding: 10px;
+      
+    }
+
+    .body_search .container_search {
+        height: 218px;
+        text-align: center;
+    }
+
+    .body_search {
+        height: auto;
+        display: block;
+        max-height: 220px;
+    }
+
+    .body_search .container_search form button {
+    font-size: 0.8rem;
+    width: auto;
+    }
+
+    .body_search .content .recommended .container_title {
+        padding-top: 3rem;
+    }
 }

@@ -188,7 +188,9 @@ if(!form("page") && value("page") !== ""){
                                 Avatar
                             </div>
                             <div class="container_body">
-                                <img src="../assets/images/<?= $u_avatar ?>" class="company_logo_preview profile_picture">
+                                <div class="image_center_body">
+                                    <img src="../assets/images/<?= $u_avatar ?>" class="company_logo_preview profile_picture">
+                                </div>
                                 <input type="file" name="input_upload_field" id="input_upload_field" class="input_upload_field" data-set="avatar" accept="image/*">
                                 <br>
                                 <label for="input_upload_field" class="btn_upload_picture" >CHANGE AVATAR</label>

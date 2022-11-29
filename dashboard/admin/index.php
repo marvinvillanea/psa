@@ -143,7 +143,7 @@ if($islogin){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DASHBOARD</title>
-    <link rel="icon" href="../../assets/logo.png" >
+    <link rel="icon" href="../../assets/peso_logo_one.gif" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -164,11 +164,11 @@ if($islogin){
         <div class="header">
             <div class="box">
                 <a href="../../" class="header_logo">
-                    <img src="../../assets/logo.png" alt="logo">
+                    <img src="../../assets/peso_logo_one.gif" alt="logo">
                     <p>CONNECT</p>
                 </a>
                 <span></span>
-                <div class="navigation">
+                <div class="navigation desktop_icon_profile">
                     <a href="?page=dashboard">
                         Dashboard
                     </a>
@@ -180,28 +180,64 @@ if($islogin){
                     </a>
                 </div>
             </div>
-            <div class="navigation">
+          
+
+            <div class="navigation desktop_icon_profile">
                 <button class="btn_user">
                     <i class="fa fa-user"></i>
+                </button>
+            </div>
+            <div class="navigation mobile_icon_profile">
+                <button class="btn_user">
+                        <i class="fa fa-bars"></i>
                 </button>
             </div>
         </div>
         <div class="body" id="body_page_<?= $page ?>">
             <div class="profile_box" style="display:none">
-                <div class="profile_box_header">
-                    <p class="profile_name">
-                        <?= $u_fname." ". $u_lname ?>
-                    </p>
-                    <p class="profile_email">
-                        <?= $u_email ?>
-                    </p>
+                 <div class="hambuger_menu_desktop">
+                    <div class="profile_box_header">
+                        <p class="profile_name">
+                            <?= $u_fname." ". $u_lname ?>
+                        </p>
+                        <p class="profile_email">
+                            <?= $u_email ?>
+                        </p>
+                    </div>
+                    <div class="profile_box_body">
+                        <a href="./?page=profile">Account Information</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_body">
-                    <a href="./?page=profile">Account Information</a>
+                <div class="hambuger_menu_mobile">
+                    <div class="profile_box_footer">
+                        <a href="?page=dashboard" class="btn_logout">Dashboard</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire" class="btn_logout">Company</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire&sub=jobs" class="btn_logout">Job's</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire&sub=applicants" class="btn_logout">Applicants</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=accounts" class="btn_logout">Accounts</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=profile" class="btn_logout">Account Information</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=password" class="btn_logout">Password</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_footer">
-                    <a href="../../logout.php" class="btn_logout">Logout</a>
-                </div>
+                
             </div>
             <?php if($page == "dashboard"){?>
                 <h2>Hi, <?= $u_fname." ". $u_lname ?> 👋</h2>

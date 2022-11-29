@@ -86,3 +86,6 @@ a{
     background: rgb(57, 158, 158);
 }
 
+.client_menu { 
+    display: none;
+ }

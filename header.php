@@ -8,10 +8,11 @@
     </a>
 </div>
 <?php } ?>
+
 <div class="header">
     <div class="text">
         <a href="/<?= $__name__ ?>" class="header_logo">
-            <img src="/<?= $__name__ ?>/assets/logo.png" alt="logo">
+            <img src="/<?= $__name__ ?>/assets/peso_logo_one.gif" alt="logo">
             <p>LocalMJob</p>
         </a>
         <label for="navigation-toggle" class="toggle-nav-btn">
@@ -45,7 +46,7 @@
             <?php if($u_type == 1){?>
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-                <a href="/<?= $__name__ ?>">CONTACT US</a>
+                <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
                 <a href="/<?= $__name__ ?>/dashboard/company" class="nav_a">
                     DASHBOARD
@@ -53,7 +54,7 @@
             <?php }elseif($u_type == 2){?>
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-                <a href="/<?= $__name__ ?>">CONTACT US</a>
+                <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
                 <a href="/<?= $__name__ ?>/dashboard/company" class="nav_a">
                     DASHBOARD
@@ -62,12 +63,14 @@
                 <a href="/<?= $__name__ ?>">HOME</a>
                 <a href="/<?= $__name__ ?>/jobs">JOBS</a>
                 <a href="/<?= $__name__ ?>/profile">PROFILE</a>
+                <a href="/<?= $__name__ ?>/profile/?page=password" class="client_menu">Password</a>   
+                <a href="/<?= $__name__ ?>/profile/?page=resume"  class="client_menu">Resume</a>   
                 <a href="/<?= $__name__ ?>/logout.php">LOGOUT</a>
             <?php } ?>
         <?php }else{?>
             <a href="/<?= $__name__ ?>">HOME</a>
             <a href="/<?= $__name__ ?>/jobs">JOBS</a>
-            <a href="/<?= $__name__ ?>/">CONTACT US</a>
+            <a href="/<?= $__name__ ?>/contact_us.php">CONTACT US</a>
             <a href="/<?= $__name__ ?>/auth?a=already">LOGIN</a>
             <a href="/<?= $__name__ ?>/auth?a=join" class="nav_a">
                 GET STARTED

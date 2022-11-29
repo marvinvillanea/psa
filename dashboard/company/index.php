@@ -63,10 +63,12 @@ if($islogin){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>DASHBOARD</title>
-    <link rel="icon" href="../../assets/logo.png" >
+    <link rel="icon" href="../../assets/peso_logo_one.gif" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="notify_style.css">
     <!-- javascript -->
@@ -78,17 +80,81 @@ if($islogin){
     <script src="js/update_general.js" defer></script>
     <script src="js/update_company.js" defer></script>
     <script src="../ckeditor/ckeditor.js"></script>
+    <style type="text/css">
+        /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 1% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 65%; /* Could be more or less, depending on screen size */
+  position: relative;
+  border-radius: 10px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+.content {
+   width: 100%;
+   margin: 0px auto;
+}
+
+.embed-container {
+/*   height: 0;*/
+   width: 100%;
+   overflow: hidden;
+   position: relative;
+}
+
+.embed-container iframe {
+   width: 100%;
+
+}
+    </style>
 </head>
 <body>
+
     <div class="main">
         <div class="header">
             <div class="box">
-                <a href="../../" class="header_logo">
-                    <img src="../../assets/logo.png" alt="logo">
-                    <p>LocalMJob</p>
-                </a>
+                <div class="mobile_lang">
+                    <a href="../../" class="header_logo">
+                        <img src="../../assets/peso_logo_one.gif" alt="logo">
+                        <p>LocalMJob</p>
+                    </a>
+                </div>
                 <span></span>
-                <div class="navigation">
+                <div class="navigation desktop_icon_profile">
                     <a href="../../">
                         Home
                     </a>
@@ -99,51 +165,102 @@ if($islogin){
                         Hire
                     </a>
                     <ul class="notification-drop">
-                    <li class="item">
-                    <button type="button" style="border: none; background: none;" onclick="showNotification()">
-                        <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">
-                            <?php echo countNotify($con, $u_id); ?>
-                            </span> 
+                        <li class="item" style="border:none;">
+                        <button type="button" style="border: none; background: none;" onclick="showNotification()">
+                            <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i> <span class="btn__badge pulse-button ">
+                                <?php echo countNotify($con, $u_id); ?>
+                                </span> 
                         </button>
-                          <ul>
-                            <?php
-                            $load_data_notificaiton = mysqli_query($con,"SELECT * FROM `tbl_notification` WHERE user_id = $u_id and `status` = 0 order by created_at desc limit 5");
-                            if(hasResult($load_data_notificaiton)){
-                                while($row = mysqli_fetch_assoc($load_data_notificaiton)){
-                                    echo "<li id='".$row["id"]."' onclick='updateNotification(this.id)' >".$row["description"]."</li>";
-                                }  
-                            }else{
-                                echo "<li>No data..</li>";
-                            }
-                             ?>
-                          </ul>
+                              <ul>
+                                <?php
+                                $load_data_notificaiton = mysqli_query($con,"SELECT * FROM `tbl_notification` WHERE user_id = $u_id and `status` = 0 order by created_at desc limit 5");
+                                if(hasResult($load_data_notificaiton)){
+                                    while($row = mysqli_fetch_assoc($load_data_notificaiton)){
+                                        echo "<li id='".$row["id"]."' onclick='updateNotification(this.id)' >".$row["description"]."</li>";
+                                    }  
+                                }else{
+                                    echo "<li>No data..</li>";
+                                }
+                                 ?>
+                              </ul>
                         </li>
                       </ul>
+                       
+
                 </div>
+                
+
+
             </div>
-            
-            <div class="navigation">
+
+
+
+            <div class="navigation desktop_icon_profile">
                 <button class="btn_user">
                     <i class="fa fa-user"></i>
                 </button>
             </div>
+            <div class="navigation mobile_icon_profile">
+                <button class="btn_user">
+                        <i class="fa fa-bars"></i>
+                </button>
+            </div>
         </div>
+
+
         <div class="body" id="body_page_<?= $page ?>">
             <div class="profile_box" style="display:none">
-                <div class="profile_box_header">
-                    <p class="profile_name">
-                        <?= $u_fname." ". $u_lname ?>
-                    </p>
-                    <p class="profile_email">
-                        <?= $u_email ?>
-                    </p>
+                
+                
+                <div class="hambuger_menu_desktop">
+                    <div class="profile_box_header">
+                        <p class="profile_name">
+                            <?= $u_fname." ". $u_lname ?>
+                        </p>
+                        <p class="profile_email">
+                            <?= $u_email ?>
+                        </p>
+                    </div>
+                    <div class="profile_box_body">
+                        <a href="./?page=profile">Account Information</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_body">
-                    <a href="./?page=profile">Account Information</a>
+                <div class="hambuger_menu_mobile">
+                    <div class="profile_box_footer">
+                        <a href="../../" class="btn_logout">Home</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=dashboard" class="btn_logout">Dashboard</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire" class="btn_logout">Hire</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="?page=hire&sub=list" class="btn_logout">List</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="?page=hire&sub=postajob" class="btn_logout">Job</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="?page=hire&sub=applicants" class="btn_logout">Applicants</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=general_information" class="btn_logout">Account Information</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=company_information" class="btn_logout">Company Information</a>
+                    </div>
+                    <div class="profile_box_footer">
+                        <a href="./?page=profile&sub=password" class="btn_logout">Password</a>
+                    </div>
+                     <div class="profile_box_footer">
+                        <a href="../../logout.php" class="btn_logout">Logout</a>
+                    </div>
                 </div>
-                <div class="profile_box_footer">
-                    <a href="../../logout.php" class="btn_logout">Logout</a>
-                </div>
+                
             </div>
             <?php if($page == "dashboard"){?>
                 <h2>Hi, <?= $u_fname." ". $u_lname ?> 👋</h2>
@@ -237,7 +354,10 @@ if($islogin){
                                             <input type="text" name="position_name" value="<?= ($update) ? $data["j_name"] : "" ?>" id="position_name" placeholder="Position name">
                                         </div>
                                         <div class="field">
-                                            <input type="number" name="position_age" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age" placeholder="Qualification age">
+                                            <input type="number" name="position_age" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age" placeholder="Qualification age From">
+                                        </div>
+                                         <div class="field">
+                                            <input type="number" name="position_age_to" value="<?= ($update) ? $data["j_age"] : "" ?>" id="position_age_to" placeholder="Qualification age To">
                                         </div>
                                         <div class="field">
                                             <input type="number" name="minimum_salary" value="<?= ($update) ? $data["j_min"] : "" ?>"  id="minimum_salary" placeholder="Minimum salary">
@@ -247,9 +367,7 @@ if($islogin){
                                         </div>
                                         <div class="field">
                                             <select name="currency_symbol" id="currency_symbol">
-                                                <option value="" <?= ($update) ? "" : "selected" ?> disabled>Currency symbol</option>
-                                                <option value="₱" <?= ($update && $data["j_currency_symbol"] == "₱") ? "selected" : "" ?> >PH Peso</option>
-                                                <option value="$" <?= ($update && $data["j_currency_symbol"] == "$") ? "selected" : "" ?> >US Dollars</option>
+                                                <option value="₱" <?= ($update && $data["j_currency_symbol"] == "₱") ? "selected" : ""  ?>  selected >PH Peso</option>
                                             </select>
                                         </div>
                                         <div class="field">
@@ -282,6 +400,7 @@ if($islogin){
                                         <a href="./?page=hire&sub=applicants&filter=hired" class="<?= ($filter=="hired") ? "active" : "" ?>">HIRED</a>
                                         <a href="./?page=hire&sub=applicants&filter=declined" class="<?= ($filter=="declined") ? "active" : "" ?>">DECLINED</a>
                                     </div>
+                                   
                                 </div>
                                 <div class="container_body">
                                     <?php if(hasResult($load_applicants)){?>
@@ -301,10 +420,10 @@ if($islogin){
                                                         <span class="label">Full name : </span>
                                                         <?= $row['firstname']; ?> <?= $row['lastname']; ?>
                                                     </p>
-                                                    <p class="posted_at">
+                                                   <!--  <p class="posted_at">
                                                         <span class="label">Birthday : </span>
                                                         <?= date("m/d/Y",strtotime($row["bday"]))?>
-                                                    </p>
+                                                    </p> -->
                                                     <p class="posted_at">
                                                         <span class="label">Age : </span>
                                                         <?= $row["age"]?>
@@ -320,26 +439,29 @@ if($islogin){
                                                 </div>
                                                 <div class="box_buttons">
                                                     <?php if($row["status"] == "2") {?>
-                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" disabled>
+                                                        <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" name='hired' disabled>
                                                             <i class="fa fa-check"></i>
                                                             HIRE
                                                         </button>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline" name='declined'>
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                       <!--  <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
                                                         </a>
+ -->
+                                                        <button class="button">
+                                                             <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank"  download style="color: white;">
+                                                                    <i class="fa fa-file-text-o"></i>EMAIL CONFIRMATION
+                                                                </a>
+                                                        </button>
+                                                       
 
-
-                                                              <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" class="button" download>
-                                                            <i class="fa fa-file-text-o"></i>EMAIL CONFIRMATION
-                                                        </a>
-
-
-
+                                                       <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
 
                                                     <?php }elseif($row["status"] == "3"){?>
                                                         <button data-id="<?= $row["id"] ?>" class="button disable btn_hired" name='hired'>
@@ -350,23 +472,30 @@ if($islogin){
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                        <!-- <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
-                                                        </a>
+                                                        </a> -->
+                                                          <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
+
                                                     <?php }else{?>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_hired">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_hired" name='hired'>
                                                             <i class="fa fa-check"></i>
                                                             HIRE
                                                         </button>
-                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline">
+                                                        <button data-id="<?= $row["id"] ?>" class="button btn_decline" name='declined'>
                                                             <i class="fa fa-times"></i>
                                                             DECLINE
                                                         </button>
-                                                        <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
+                                                       <!--  <a href="../../resume/<?= $row["resume"] ?>" class="button" download>
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
-                                                        </a>
+                                                        </a> -->
+                                                         <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                                <i class="fa fa-file-text-o"></i>   VIEW RESUME
+                                                        </button>
                                                     <?php }?>
                                                 </div>
                                             </div>
@@ -571,6 +700,29 @@ if($islogin){
             <?php }else{ navigate("./"); }?>
         </div>
     </div>
+
+<!-- modal scroll -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    
+    <div class="content">
+        <div class="embed-container">
+           <iframe src="" width="560"
+      height="315" frameborder="0"  onload="resizeIframe(this)" id="documentsDetails"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" loading="lazy">
+             </iframe>
+       </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
 </body>
 </html>
 
@@ -602,4 +754,50 @@ function updateNotification(id){
         }
     });
 }
+
+// // Get the modal
+// var modal = document.getElementById("myModal");
+
+// // Get the button that opens the modal
+// var btn = document.getElementById("myBtn");
+
+// // Get the <span> element that closes the modal
+// var span = document.getElementsByClassName("close")[0];
+
+// // When the user clicks on the button, open the modal
+// btn.onclick = function() {
+//   modal.style.display = "block";
+//   document.getElementById("documentsDetails").src = btn.value;
+// }
+
+ function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+
+
+function showModal(documentDetails, getID){
+    // // Get the modal
+     document.getElementById("documentsDetails").src = '';
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+    // // Get the button that opens the modal
+    var btn = document.getElementById(getID);
+
+    // // When the user clicks on the button, open the modal
+    document.getElementById("documentsDetails").src = documentDetails;
+
+}
+
+function closeModal(){
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+
 </script>

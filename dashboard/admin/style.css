@@ -730,3 +730,82 @@ input[type=file]{
 .btn_upload_picture:hover{
     background: #623ADA;
 }
+
+
+
+.navigation_mobile { 
+    display: none;
+ }
+
+  .mobile_icon_profile {
+    display: none;
+}
+
+.hambuger_menu_mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+   #body_page_dashboard {
+        padding: 18px;
+    }
+
+    
+    #body_page_hire .sidebar {
+        display: none;
+    }
+    .header .header_desktop { 
+        display: none;
+     }
+
+     #body_page_hire .showcase {
+      width: 100%;
+    }
+    #showcase_sub_applicants .container .container_body .box .box_buttons {
+        display: block;
+        gap: 0.5rem;
+    }
+    #showcase_sub_applicants .container .container_body .box .box_buttons .button {
+        background: #623ADA;
+        color: white;
+        padding: 1rem 1.5rem;
+        font-size: .9rem;
+        border-radius: 5px;
+        /* display: block; */
+        width: 100%;
+        margin-top: 10px;
+    }
+    .mobile_icon_profile {
+        display: flex;
+    }
+
+    .desktop_icon_profile {
+        display: none;
+    }
+    .header .box {
+         display: block; 
+        gap: 3rem;
+    }
+    .header {
+       
+        padding: 1rem;
+       
+    }
+
+    .hambuger_menu_mobile {
+        display: block;
+        padding-top: 10px;
+    }
+    .hambuger_menu_desktop {
+        display: none;
+    }
+    
+    #body_page_profile .sidebar {
+        display: none;
+    }
+
+    #body_page_accounts .sidebar {
+        display: none;
+    }
+}
