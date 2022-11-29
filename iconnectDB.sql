@@ -1,23 +1,4 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               8.0.30 - MySQL Community Server - GPL
--- Server OS:                    Win64
--- HeidiSQL Version:             12.1.0.6537
--- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Dumping database structure for iconnect
-CREATE DATABASE IF NOT EXISTS `iconnect` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `iconnect`;
 
 -- Dumping structure for table iconnect.tbl_accounts
 CREATE TABLE IF NOT EXISTS `tbl_accounts` (
@@ -46,8 +27,7 @@ CREATE TABLE IF NOT EXISTS `tbl_accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_accounts: ~9 rows (approximately)
-DELETE FROM `tbl_accounts`;
+
 INSERT INTO `tbl_accounts` (`id`, `firstname`, `lastname`, `cnum`, `bday`, `age`, `address`, `email`, `password`, `type`, `verification_state`, `avatar`, `department`, `created_at`, `facebook`, `linkedin`, `instagram`, `degree_title`, `school_name`, `school_address`, `school_year_attended`, `achievement`) VALUES
 	(6, 'admin', 'admin', '09093939708', '2001-08-30', 25, '739 G. Araneta Avenue 1100', 'admin@connect.com', '1234', 1, 0, 'avatar_default.png', 'none', '2022-08-03 10:15:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(7, 'company', 'company', '09093939705', '2022-09-10', 25, 'Rm. 202 Grace Building Ortigas Avenue Greenhills 1500', 'company@connect.com', '1234', 2, 0, 'avatar_default.png', 'none', '2022-08-03 10:33:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -70,8 +50,7 @@ CREATE TABLE IF NOT EXISTS `tbl_applicants` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_applicants: ~8 rows (approximately)
-DELETE FROM `tbl_applicants`;
+
 INSERT INTO `tbl_applicants` (`id`, `companyid`, `applicantsid`, `jobid`, `status`, `created_at`) VALUES
 	(1, 4, 8, 3, 1, '2022-08-12 06:00:44'),
 	(2, 4, 8, 3, 1, '2022-08-12 06:00:44'),
@@ -97,8 +76,7 @@ CREATE TABLE IF NOT EXISTS `tbl_company` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_company: ~6 rows (approximately)
-DELETE FROM `tbl_company`;
+
 INSERT INTO `tbl_company` (`id`, `userid`, `c_logo`, `c_banner`, `c_name`, `c_address`, `c_cnum`, `c_position`, `department`, `created_at`) VALUES
 	(4, 6, 'company_logo_default.png', 'company_banner_default.png', 'D Devs', 'Manila, Metro Manila', '09093939708', 'I.T', 'I.T', '2022-08-03 10:15:03'),
 	(5, 7, 'company_logo_default.png', 'company_banner_default.png', 'Fux Devs', 'Manila, Metro Manila', '09093939708', 'I.T', 'I.T', '2022-08-03 10:33:47'),
@@ -117,8 +95,7 @@ CREATE TABLE IF NOT EXISTS `tbl_company_reports` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_company_reports: ~3 rows (approximately)
-DELETE FROM `tbl_company_reports`;
+
 INSERT INTO `tbl_company_reports` (`id`, `company_id`, `reported_by`, `message`, `created_at`) VALUES
 	(1, 4, 8, 'Miss leading information', '2022-08-26 18:35:28'),
 	(2, 4, 8, 'Miss leading information', '2022-08-26 18:35:28'),
@@ -138,8 +115,6 @@ CREATE TABLE IF NOT EXISTS `tbl_jobs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_jobs: ~27 rows (approximately)
-DELETE FROM `tbl_jobs`;
 INSERT INTO `tbl_jobs` (`id`, `userid`, `j_name`, `j_age`, `j_min`, `j_max`, `j_currency_symbol`, `j_description`, `j_created_at`) VALUES
 	(1, 7, 'I.T', 18, 15000, 200000, '₱', 'Solary', '2022-08-04 16:46:17'),
 	(2, 7, 'Social Media Avertiser', 18, 10000, 200000, '₱', 'Solary', '2022-08-04 16:46:17'),
@@ -180,8 +155,6 @@ CREATE TABLE IF NOT EXISTS `tbl_notification` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_notification: ~51 rows (approximately)
-DELETE FROM `tbl_notification`;
 INSERT INTO `tbl_notification` (`id`, `user_id`, `description`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 3, 'You`re hired, Hello $fullname, We see your resume and you have good potential for this kind of job $job_name , Please contact us on $company_cnum. - $company_name.', 0, '2022-11-14 15:05:23', '2022-11-14 15:05:23'),
 	(2, 3, 'Hello client client, Your application for this position Back End Developer was declined - Fux Devs.', 0, '2022-11-14 15:07:13', '2022-11-14 15:07:13'),
@@ -244,8 +217,6 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_resume: ~5 rows (approximately)
-DELETE FROM `tbl_resume`;
 INSERT INTO `tbl_resume` (`id`, `userid`, `path`, `created_at`) VALUES
 	(1, 6, 'example1.png', '2022-08-11 22:35:51'),
 	(2, 7, 'example4.png', '2022-08-11 22:35:51'),
@@ -262,8 +233,6 @@ CREATE TABLE IF NOT EXISTS `tbl_sms_logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_sms_logs: ~32 rows (approximately)
-DELETE FROM `tbl_sms_logs`;
 INSERT INTO `tbl_sms_logs` (`id`, `receiverid`, `message`, `created_at`) VALUES
 	(69, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job PHP PROGRAMMER .","to":"+6309755983121"}', '2022-11-28 17:22:50'),
 	(70, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 17:22:51'),
@@ -309,8 +278,6 @@ CREATE TABLE IF NOT EXISTS `tbl_verificationcode` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_verificationcode: ~5 rows (approximately)
-DELETE FROM `tbl_verificationcode`;
 INSERT INTO `tbl_verificationcode` (`id`, `session`, `code`, `status`, `used_at`, `created_at`) VALUES
 	(17, 'dd3d05d7de99af7a376db3aaf6a18dba', '484709', 1, '2022-09-01 21:34:41', '2022-09-01 21:33:54'),
 	(19, '5nRJwCgt95yfmq9qXlB1lv16683973682073', NULL, 0, '2022-11-14 03:42:48', '2022-11-14 03:42:48'),
@@ -318,8 +285,4 @@ INSERT INTO `tbl_verificationcode` (`id`, `session`, `code`, `status`, `used_at`
 	(21, '5nRJwCgt95yfmq9qXlyjW216684349778122', NULL, 1, '2022-11-14 14:10:35', '2022-11-14 14:09:38'),
 	(22, '5nRJwCgt95yfmq9qXm69fL16684414075689', NULL, 1, '2022-11-14 15:57:12', '2022-11-14 15:56:49');
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+

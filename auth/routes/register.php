@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }else{
         message(false,"There was a problem with your email address.");
     }
-
+    
     //register_account
     $register_account = mysqli_query($con,"
     INSERT INTO `tbl_accounts`(
@@ -89,14 +89,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         `password`,
         `type`,
         `department`,
-        'facebook',
-        'linkedin',
-        'instagram',
-        'degree_title',
-        'school_name',
-        'school_address',
-        'school_year_attended',
-        'achievement'
+       `facebook`,
+       `linkedin`,
+       `instagram`,
+       `degree_title`,
+       `school_name`,
+       `school_address`,
+       `school_year_attended`,
+       `achievement`
     )
     VALUES(
             '$fname',

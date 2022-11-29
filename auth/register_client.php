@@ -6,15 +6,15 @@
            <div class="stepwizard" >
              <div class="stepwizard-row setup-panel">
               <div class="stepwizard-step">
-                 <a href="#step-1" type="button" class="btn btn-primary btn-circle" disabled="disabled">1</a>
+                 <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
                  <p>General information</p>
                </div>
                 <div class="stepwizard-step">
-                 <a href="#step-2" type="button" class="btn btn-primary btn-circle" disabled="disabled">2</a>
+                 <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
                  <p>Educational Background</p>
                </div>
                 <div class="stepwizard-step">
-                 <a href="#step-3" type="button" class="btn btn-primary btn-circle" disabled="disabled">3</a>
+                 <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                  <p>Social Media Links</p>
                </div>
                <div class="stepwizard-step">
@@ -110,7 +110,7 @@
                <div class="row setup-content" id="step-3">
                  <div class="col-xs-12">
                    <div class="col-md-12">
-                     <h3> Step 2</h3>
+                     <h3> Step 3</h3>
                      <div class="form-group">
                        <label class="control-label">Facebook</label>
                        <input maxlength="100" required="required" class="form-control" placeholder="Facebook" name="facebook" value="" type="text" >
@@ -132,7 +132,7 @@
                <div class="row setup-content" id="step-4">
                  <div class="col-xs-12">
                    <div class="col-md-12">
-                     <h3> Step 2</h3>
+                     <h3> Step 4</h3>
                      <div class="form-group">
                        <label class="control-label">Email</label>
                        <input  required="required" class="form-control" placeholder="Enter Email" type="text" name="email" value="">
