@@ -2,7 +2,7 @@
 
 $server = "localhost";
 $username = "root";
-$password = "";
+$password = "linkers1bs";
 $database = "iconnect";
 
 $__name__ = "iconnect";
