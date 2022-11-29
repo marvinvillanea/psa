@@ -6,11 +6,19 @@
            <div class="stepwizard" >
              <div class="stepwizard-row setup-panel">
               <div class="stepwizard-step">
-                 <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                 <a href="#step-1" type="button" class="btn btn-primary btn-circle" disabled="disabled">1</a>
                  <p>General information</p>
                </div>
+                <div class="stepwizard-step">
+                 <a href="#step-2" type="button" class="btn btn-primary btn-circle" disabled="disabled">2</a>
+                 <p>Educational Background</p>
+               </div>
+                <div class="stepwizard-step">
+                 <a href="#step-3" type="button" class="btn btn-primary btn-circle" disabled="disabled">3</a>
+                 <p>Social Media Links</p>
+               </div>
                <div class="stepwizard-step">
-                 <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                 <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
                  <p>Account</p>
                </div>
              </div>
@@ -68,8 +76,60 @@
                  </div>
                </div>
 
+                <div class="row setup-content" id="step-2">
+                 <div class="col-xs-12">
+                   <div class="col-md-12">
+                     <h3> Step 2</h3>
+                     <div class="form-group">
+                       <label class="control-label">Degree Title</label>
+                       <input maxlength="100" required="required" class="form-control" placeholder="Enter Degree Title" name="degree_title" value="" type="text" >
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label">Name of School</label>
+                       <input maxlength="100" required="required" class="form-control" name="school_name" placeholder="Name of School"  value="" type="text" >
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label">Address</label>
+                       <input m name="school_address" placeholder="Address" maxlength="11" required="required" class="form-control"   value="" type="text" >
+                     </div>
+                     <div class="form-group">
+                        <label class="control-label">Years attended</label>
+                         <input  required="required" class="form-control"  name="school_year_attended" placeholder="Years attended"  value="" type="text" >
+                    </div>
+                      <div class="form-group">
+                        <label class="control-label">Achievement Relevant</label>
+                         <input  required="required" class="form-control"  name="achievement" placeholder="Achievement Relevant"  value="" type="text" >
+                    </div>
+                   
+                     <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                   </div>
+                 </div>
+               </div>
 
-               <div class="row setup-content" id="step-2">
+               <div class="row setup-content" id="step-3">
+                 <div class="col-xs-12">
+                   <div class="col-md-12">
+                     <h3> Step 2</h3>
+                     <div class="form-group">
+                       <label class="control-label">Facebook</label>
+                       <input maxlength="100" required="required" class="form-control" placeholder="Facebook" name="facebook" value="" type="text" >
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label">LinkedIn</label>
+                       <input maxlength="100" required="required" class="form-control" name="linkedin" placeholder="LinkedIn"  value="" type="text" >
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label">Instagram</label>
+                       <input m name="instagram" placeholder="Instagram" required="required" class="form-control"   value="" type="text" >
+                     </div>
+                     <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Back</button>
+                     <button class="btn btn-primary nextBtn btn-lg pull-right" type="button">Next</button>
+                   </div>
+                 </div>
+               </div>
+
+               <div class="row setup-content" id="step-4">
                  <div class="col-xs-12">
                    <div class="col-md-12">
                      <h3> Step 2</h3>

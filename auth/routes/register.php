@@ -16,6 +16,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $email = $data["email"];
     $password = $data["password"];
     $department = $data["department"];
+    $facebook = $data["facebook"];
+    $linkedin = $data["linkedin"];
+    $instagram = $data["instagram"];
+    $degree_title = $data["degree_title"];
+    $school_name = $data["school_name"];
+    $school_address = $data["school_address"];
+    $school_year_attended = $data["school_year_attended"];
+    $achievement = $data["achievement"];
 
     function message($status,$message){
         $msg = array(
@@ -80,7 +88,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         `email`,
         `password`,
         `type`,
-        `department`
+        `department`,
+        'facebook',
+        'linkedin',
+        'instagram',
+        'degree_title',
+        'school_name',
+        'school_address',
+        'school_year_attended',
+        'achievement'
     )
     VALUES(
             '$fname',
@@ -92,7 +108,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             '$email',
             '$password',
             $account_type,
-            '$department'
+            '$department',
+            '$facebook',
+            '$linkedin',
+            '$instagram',
+            '$degree_title',
+            '$school_name',
+            '$school_address',
+            '$school_year_attended',
+            '$achievement'
         )
     ");
 

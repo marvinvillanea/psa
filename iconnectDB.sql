@@ -20,7 +20,6 @@ CREATE DATABASE IF NOT EXISTS `iconnect` /*!40100 DEFAULT CHARACTER SET utf8mb4 
 USE `iconnect`;
 
 -- Dumping structure for table iconnect.tbl_accounts
-DROP TABLE IF EXISTS `tbl_accounts`;
 CREATE TABLE IF NOT EXISTS `tbl_accounts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) NOT NULL,
@@ -36,21 +35,31 @@ CREATE TABLE IF NOT EXISTS `tbl_accounts` (
   `avatar` varchar(50) NOT NULL DEFAULT 'avatar_default.png',
   `department` varchar(50) NOT NULL DEFAULT 'none',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `facebook` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `linkedin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `instagram` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `degree_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `school_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `school_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `school_year_attended` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `achievement` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_accounts: ~5 rows (approximately)
+-- Dumping data for table iconnect.tbl_accounts: ~9 rows (approximately)
 DELETE FROM `tbl_accounts`;
-INSERT INTO `tbl_accounts` (`id`, `firstname`, `lastname`, `cnum`, `bday`, `age`, `address`, `email`, `password`, `type`, `verification_state`, `avatar`, `department`, `created_at`) VALUES
-	(6, 'admin', 'admin', '09093939708', '2001-08-30', 25, '739 G. Araneta Avenue 1100', 'admin@connect.com', '1234', 1, 0, 'avatar_default.png', 'none', '2022-08-03 10:15:03'),
-	(7, 'company', 'company', '09093939705', '2022-09-10', 25, 'Rm. 202 Grace Building Ortigas Avenue Greenhills 1500', 'company@connect.com', '1234', 2, 0, 'avatar_default.png', 'none', '2022-08-03 10:33:47'),
-	(8, 'client', 'client', '09486502742', '2002-02-22', 25, 'P. Burgos Street corner Caseres Street', 'client@connect.com', '1234', 3, 2, 'avatar_default.png', 'I.T', '2022-08-03 10:34:28'),
-	(9, 'client1', 'client1', '09755983121', '2002-02-22', 25, '#26 mBaguio First Hotel, Bonifacio Street', 'client1@connect.com', '1234', 3, 2, 'avatar_default.png', 'I.T', '2022-08-03 10:34:28'),
-	(10, '1', '1', '09093939708', '2022-09-15', 12, '12121', '1234@yahoo.com', '123456789', 2, 0, 'avatar_default.png', 'none', '2022-09-14 09:06:23'),
-	(12, 'marvin', 'villanea', '09486502742', '2006-02-07', 21, 'Purok 2, Tibanga-Saray', 'marvinvillanea1@gmail.com', 'marvin123', 3, 2, 'avatar_default.png', 'I.T', '2022-11-14 15:56:26');
+INSERT INTO `tbl_accounts` (`id`, `firstname`, `lastname`, `cnum`, `bday`, `age`, `address`, `email`, `password`, `type`, `verification_state`, `avatar`, `department`, `created_at`, `facebook`, `linkedin`, `instagram`, `degree_title`, `school_name`, `school_address`, `school_year_attended`, `achievement`) VALUES
+	(6, 'admin', 'admin', '09093939708', '2001-08-30', 25, '739 G. Araneta Avenue 1100', 'admin@connect.com', '1234', 1, 0, 'avatar_default.png', 'none', '2022-08-03 10:15:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, 'company', 'company', '09093939705', '2022-09-10', 25, 'Rm. 202 Grace Building Ortigas Avenue Greenhills 1500', 'company@connect.com', '1234', 2, 0, 'avatar_default.png', 'none', '2022-08-03 10:33:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(8, 'client', 'client', '09486502742', '2002-02-22', 25, 'P. Burgos Street corner Caseres Street', 'client@connect.com', '1234', 3, 0, 'avatar_default.png', 'I.T', '2022-08-03 10:34:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(9, 'client1', 'client1', '09755983121', '2002-02-22', 25, '#26 mBaguio First Hotel, Bonifacio Street', 'client1@connect.com', '1234', 3, 2, 'avatar_default.png', 'I.T', '2022-08-03 10:34:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(10, '1', '1', '09093939708', '2022-09-15', 12, '12121', '1234@yahoo.com', '123456789', 2, 0, 'avatar_default.png', 'none', '2022-09-14 09:06:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(12, 'marvin', 'villanea', '09486502742', '2006-02-07', 21, 'Purok 2, Tibanga-Saray', 'marvinvillanea1@gmail.com', 'marvin123', 3, 2, 'avatar_default.png', 'I.T', '2022-11-14 15:56:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(13, 'VILLANEA', 'MARVIN', '09755983121', '2022-02-13', 23, 'adfafdaf', 'courier@gmail.com', 'testing123', 2, 0, 'avatar_default.png', 'none', '2022-11-26 13:17:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(14, 'VILLANEA', 'MARVIN', '09755983121', '2022-02-02', 23, 'testing123', 'courier2123@gmail.com', 'courier2123', 2, 0, 'avatar_default.png', 'none', '2022-11-26 13:21:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(15, 'VILLANEA', 'MARVIN', '09755983121', '2022-11-09', 23, 'testing123', 'USDggcharot@gmail.com', 'USDggcharot', 3, 0, 'avatar_default.png', 'dasfadsfas', '2022-11-26 13:58:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- Dumping structure for table iconnect.tbl_applicants
-DROP TABLE IF EXISTS `tbl_applicants`;
 CREATE TABLE IF NOT EXISTS `tbl_applicants` (
   `id` int NOT NULL AUTO_INCREMENT,
   `companyid` int NOT NULL,
@@ -59,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `tbl_applicants` (
   `status` int NOT NULL DEFAULT '1' COMMENT '1=pending\r\n2=hired\r\n3=decline',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_applicants: ~5 rows (approximately)
+-- Dumping data for table iconnect.tbl_applicants: ~8 rows (approximately)
 DELETE FROM `tbl_applicants`;
 INSERT INTO `tbl_applicants` (`id`, `companyid`, `applicantsid`, `jobid`, `status`, `created_at`) VALUES
 	(1, 4, 8, 3, 1, '2022-08-12 06:00:44'),
@@ -69,10 +78,11 @@ INSERT INTO `tbl_applicants` (`id`, `companyid`, `applicantsid`, `jobid`, `statu
 	(3, 5, 8, 3, 2, '2022-08-12 06:00:44'),
 	(4, 5, 8, 3, 2, '2022-08-12 06:00:44'),
 	(5, 4, 8, 3, 1, '2022-09-02 06:31:42'),
-	(7, 5, 8, 2, 1, '2022-11-15 02:06:55');
+	(7, 5, 8, 2, 3, '2022-11-15 02:06:55'),
+	(8, 5, 9, 2, 1, '2022-11-28 14:19:16'),
+	(9, 5, 9, 14, 1, '2022-11-29 02:05:32');
 
 -- Dumping structure for table iconnect.tbl_company
-DROP TABLE IF EXISTS `tbl_company`;
 CREATE TABLE IF NOT EXISTS `tbl_company` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
@@ -85,18 +95,19 @@ CREATE TABLE IF NOT EXISTS `tbl_company` (
   `department` varchar(50) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_company: ~4 rows (approximately)
+-- Dumping data for table iconnect.tbl_company: ~6 rows (approximately)
 DELETE FROM `tbl_company`;
 INSERT INTO `tbl_company` (`id`, `userid`, `c_logo`, `c_banner`, `c_name`, `c_address`, `c_cnum`, `c_position`, `department`, `created_at`) VALUES
 	(4, 6, 'company_logo_default.png', 'company_banner_default.png', 'D Devs', 'Manila, Metro Manila', '09093939708', 'I.T', 'I.T', '2022-08-03 10:15:03'),
 	(5, 7, 'company_logo_default.png', 'company_banner_default.png', 'Fux Devs', 'Manila, Metro Manila', '09093939708', 'I.T', 'I.T', '2022-08-03 10:33:47'),
 	(6, 8, 'company_logo_default.png', 'company_banner_default.png', 'Metro Ui', 'Manila, Metro Manila', '09093939708', 'Advertiser', 'I.T', '2022-08-03 10:34:28'),
-	(7, 10, 'company_logo_default.png', 'company_banner_default.png', '12adasd', 'asdasd', '09093939708', 'asdasdas', 'try', '2022-09-14 09:06:23');
+	(7, 10, 'company_logo_default.png', 'company_banner_default.png', '12adasd', 'asdasd', '09093939708', 'asdasdas', 'try', '2022-09-14 09:06:23'),
+	(8, 13, 'company_logo_default.png', 'company_banner_default.png', 'ggg', '2313123', '09755983121', 'afdasfads', 'dasfadsfas', '2022-11-26 13:17:37'),
+	(9, 14, 'company_logo_default.png', 'company_banner_default.png', 'ggg', '2313123', '09755983121', 'ggg', '123', '2022-11-26 13:21:45');
 
 -- Dumping structure for table iconnect.tbl_company_reports
-DROP TABLE IF EXISTS `tbl_company_reports`;
 CREATE TABLE IF NOT EXISTS `tbl_company_reports` (
   `id` int NOT NULL AUTO_INCREMENT,
   `company_id` int NOT NULL,
@@ -114,7 +125,6 @@ INSERT INTO `tbl_company_reports` (`id`, `company_id`, `reported_by`, `message`,
 	(3, 4, 8, 'asdasdsa', '2022-09-01 23:43:15');
 
 -- Dumping structure for table iconnect.tbl_jobs
-DROP TABLE IF EXISTS `tbl_jobs`;
 CREATE TABLE IF NOT EXISTS `tbl_jobs` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
@@ -126,19 +136,40 @@ CREATE TABLE IF NOT EXISTS `tbl_jobs` (
   `j_description` text NOT NULL,
   `j_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_jobs: ~5 rows (approximately)
+-- Dumping data for table iconnect.tbl_jobs: ~27 rows (approximately)
 DELETE FROM `tbl_jobs`;
 INSERT INTO `tbl_jobs` (`id`, `userid`, `j_name`, `j_age`, `j_min`, `j_max`, `j_currency_symbol`, `j_description`, `j_created_at`) VALUES
 	(1, 7, 'I.T', 18, 15000, 200000, '₱', 'Solary', '2022-08-04 16:46:17'),
 	(2, 7, 'Social Media Avertiser', 18, 10000, 200000, '₱', 'Solary', '2022-08-04 16:46:17'),
 	(3, 6, 'Back End Developer', 18, 15000, 20000, '₱', '<p><strong>Bruh</strong></p>\r\n', '2022-08-11 21:22:23'),
 	(4, 7, 'PHP Dev', 21, 15000, 30000, '₱', '<p>Hi</p>\r\n', '2022-09-14 10:23:22'),
-	(5, 7, '1', 50, 1, 1, '₱', '<p>1</p>\r\n', '2022-09-14 10:24:26');
+	(5, 7, '1', 50, 1, 1, '₱', '<p>1</p>\r\n', '2022-09-14 10:24:26'),
+	(6, 7, 'Marvin', 56, 2000, 3000, '₱', '<p>Helooo wafdafdsa</p>\r\n', '2022-11-28 16:48:40'),
+	(7, 7, 'Marvin', 56, 2000, 3000, '₱', '<p>Helooo wafdafdsa</p>\r\n', '2022-11-28 16:48:44'),
+	(8, 7, 'TESTIN', 24, 23333, 23333, '₱', '<p>DSAFADSFDASFASF</p>\r\n', '2022-11-28 17:05:43'),
+	(9, 7, 'TESTIN', 24, 23333, 23333, '₱', '<p>HELO GOODMINRONG</p>\r\n', '2022-11-28 17:05:46'),
+	(10, 7, 'TESTIN', 24, 23333, 23333, '₱', '<p>HELO GOODMINRONG</p>\r\n', '2022-11-28 17:05:51'),
+	(11, 7, 'Web Developer', 130, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper</p>\r\n', '2022-11-28 17:07:26'),
+	(12, 7, 'Web Developer', 130, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper.<br />\r\nTesting&nbsp;</p>\r\n', '2022-11-28 17:07:31'),
+	(13, 7, 'Web Developer', 23, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper.<br />\r\nTesting&nbsp;</p>\r\n', '2022-11-28 17:07:41'),
+	(14, 7, 'Web Developer', 23, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper.<br />\r\nTesting&nbsp;</p>\r\n', '2022-11-28 17:07:49'),
+	(15, 7, 'Web Developer', 23, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper.<br />\r\nTesting&nbsp;</p>\r\n', '2022-11-28 17:07:50'),
+	(16, 7, 'Web Developer', 32, 30000, 30000, '₱', '<p>Hello team good day, We&#39;re hiring a developer to create devveloper.<br />\r\nTesting&nbsp;</p>\r\n', '2022-11-28 17:08:11'),
+	(17, 7, 'Marvin', 42, 30000, 30000, '₱', '<p>HRLLO WOLRD</p>\r\n', '2022-11-28 17:11:19'),
+	(18, 7, 'Marvin', 42, 30000, 30000, '₱', '<p>HRLLO WOLRDDASFDASFDASF</p>\r\n', '2022-11-28 17:13:14'),
+	(19, 7, 'Marvin3232', 39, 30000, 30000, '₱', '<p>HRLLO WOLRDDASFDASFDASF</p>\r\n', '2022-11-28 17:21:18'),
+	(20, 7, 'PHP PROGRAMMER ', 39, 30000, 30000, '₱', '<p>HRLLO WOLRDDASFDASFDASF</p>\r\n', '2022-11-28 17:22:50'),
+	(21, 7, 'Web Developer Testinggggffff', 24, 2222, 2222, '₱', '<p>2222</p>\r\n', '2022-11-28 18:18:25'),
+	(22, 7, 'Web Developer', 23, 2333, 2333, '₱', 'dsafdsafdasfasdfdsaf', '2022-11-28 18:25:27'),
+	(23, 7, 'Web Developer Testindsafdasfadsf', 21, 12313, 12313, '₱', '<p>1234</p>\r\n', '2022-11-28 18:26:31'),
+	(24, 7, 'Web Developer TAE', 18, 5000, 50000, '₱', '<p>dsaf</p>\r\n', '2022-11-28 18:33:44'),
+	(25, 7, 'TESTIN tae', 50, 50000, 49998, '₱', '<p>afdasfdasfdasf</p>\r\n', '2022-11-28 18:34:21'),
+	(26, 7, 'Web Developer Testingggg TAEEEEE', 60, 5000, 50000, '₱', '<p>DFSAFDASFDSAFADSF</p>\r\n', '2022-11-28 18:34:55'),
+	(27, 7, 'Web Developer Testingggg fsdgfdsgfsdg', 50, 50000, 50000, '₱', '<p>dsafdsafdasfas</p>\r\n', '2022-11-28 18:35:22');
 
 -- Dumping structure for table iconnect.tbl_notification
-DROP TABLE IF EXISTS `tbl_notification`;
 CREATE TABLE IF NOT EXISTS `tbl_notification` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL DEFAULT '0',
@@ -147,9 +178,9 @@ CREATE TABLE IF NOT EXISTS `tbl_notification` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_notification: ~20 rows (approximately)
+-- Dumping data for table iconnect.tbl_notification: ~51 rows (approximately)
 DELETE FROM `tbl_notification`;
 INSERT INTO `tbl_notification` (`id`, `user_id`, `description`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 3, 'You`re hired, Hello $fullname, We see your resume and you have good potential for this kind of job $job_name , Please contact us on $company_cnum. - $company_name.', 0, '2022-11-14 15:05:23', '2022-11-14 15:05:23'),
@@ -171,10 +202,40 @@ INSERT INTO `tbl_notification` (`id`, `user_id`, `description`, `status`, `creat
 	(17, 8, 'You`re hired, Hello client client, We see your resume and you have good potential for this kind of job Back End Developer , Please contact us on 09093939708. - Fux Devs.', 1, '2022-11-14 15:27:14', '2022-11-15 01:52:19'),
 	(18, 8, 'Hello client client, Your application for this position Back End Developer was declined - Fux Devs.', 0, '2022-11-15 01:54:19', '2022-11-15 01:54:19'),
 	(19, 8, 'You`re hired, Hello client client, We see your resume and you have good potential for this kind of job Back End Developer , Please contact us on 09093939708. - Fux Devs.', 0, '2022-11-15 01:54:23', '2022-11-15 01:54:23'),
-	(20, 7, 'Company, Company, Applying for  Social Media Avertiser', 0, '2022-11-15 02:06:55', '2022-11-15 02:45:25');
+	(20, 7, 'Company, Company, Applying for  Social Media Avertiser', 1, '2022-11-15 02:06:55', '2022-11-16 15:55:45'),
+	(21, 8, 'Hello client client, Your application for this position Social Media Avertiser was declined - Fux Devs.', 1, '2022-11-16 15:56:01', '2022-11-16 15:58:16'),
+	(22, 7, 'Company, Company, Applying for  Social Media Avertiser', 0, '2022-11-28 14:19:16', '2022-11-28 14:19:16'),
+	(23, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job TESTIN.', 0, '2022-11-28 17:05:43', '2022-11-28 17:05:43'),
+	(24, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job TESTIN.', 0, '2022-11-28 17:05:46', '2022-11-28 17:05:46'),
+	(25, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job TESTIN.', 0, '2022-11-28 17:05:51', '2022-11-28 17:05:51'),
+	(26, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:07:26', '2022-11-28 17:07:26'),
+	(27, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:07:31', '2022-11-28 17:07:31'),
+	(28, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:07:41', '2022-11-28 17:07:41'),
+	(29, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:07:49', '2022-11-28 17:07:49'),
+	(30, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:07:50', '2022-11-28 17:07:50'),
+	(31, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 17:08:11', '2022-11-28 17:08:11'),
+	(32, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Marvin.', 0, '2022-11-28 17:11:19', '2022-11-28 17:11:19'),
+	(33, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Marvin.', 0, '2022-11-28 17:13:14', '2022-11-28 17:13:14'),
+	(34, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Marvin3232.', 0, '2022-11-28 17:21:18', '2022-11-28 17:21:18'),
+	(35, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job PHP PROGRAMMER .', 0, '2022-11-28 17:22:50', '2022-11-28 17:22:50'),
+	(36, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job PHP PROGRAMMER .', 0, '2022-11-28 17:22:51', '2022-11-28 17:22:51'),
+	(37, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testinggggffff.', 0, '2022-11-28 18:18:25', '2022-11-28 18:18:25'),
+	(38, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testinggggffff.', 0, '2022-11-28 18:18:26', '2022-11-28 18:18:26'),
+	(39, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.', 0, '2022-11-28 18:25:27', '2022-11-28 18:25:27'),
+	(40, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer.', 0, '2022-11-28 18:25:27', '2022-11-28 18:25:27'),
+	(41, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testindsafdasfadsf.', 0, '2022-11-28 18:26:31', '2022-11-28 18:26:31'),
+	(42, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testindsafdasfadsf.', 0, '2022-11-28 18:26:31', '2022-11-28 18:26:31'),
+	(43, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer TAE.', 0, '2022-11-28 18:33:44', '2022-11-28 18:33:44'),
+	(44, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer TAE.', 0, '2022-11-28 18:33:44', '2022-11-28 18:33:44'),
+	(45, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job TESTIN tae.', 0, '2022-11-28 18:34:21', '2022-11-28 18:34:21'),
+	(46, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job TESTIN tae.', 0, '2022-11-28 18:34:22', '2022-11-28 18:34:22'),
+	(47, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testingggg TAEEEEE.', 0, '2022-11-28 18:34:55', '2022-11-28 18:34:55'),
+	(48, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testingggg TAEEEEE.', 0, '2022-11-28 18:34:55', '2022-11-28 18:34:55'),
+	(49, 9, 'LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testingggg fsdgfdsgfsdg.', 0, '2022-11-28 18:35:22', '2022-11-28 18:35:22'),
+	(50, 12, 'LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testingggg fsdgfdsgfsdg.', 0, '2022-11-28 18:35:22', '2022-11-28 18:35:22'),
+	(51, 7, 'Company, Company, Applying for  Web Developer', 1, '2022-11-29 02:05:32', '2022-11-29 02:05:41');
 
 -- Dumping structure for table iconnect.tbl_resume
-DROP TABLE IF EXISTS `tbl_resume`;
 CREATE TABLE IF NOT EXISTS `tbl_resume` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
@@ -187,92 +248,57 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
 DELETE FROM `tbl_resume`;
 INSERT INTO `tbl_resume` (`id`, `userid`, `path`, `created_at`) VALUES
 	(1, 6, 'example1.png', '2022-08-11 22:35:51'),
-	(2, 7, 'example2.jpg', '2022-08-11 22:35:51'),
-	(3, 8, 'c9f0f895fb98ab9159f51fd0297e236d.jpg', '2022-09-01 21:34:59'),
+	(2, 7, 'example4.png', '2022-08-11 22:35:51'),
+	(3, 8, 'example4.png', '2022-09-01 21:34:59'),
 	(4, 9, '45c48cce2e2d7fbdea1afc51c7c6ad26.jpg', '2022-11-14 14:33:18'),
-	(5, 12, 'c20ad4d76fe97759aa27a0c99bff6710.jpg', '2022-11-14 15:58:45');
+	(5, 12, 'example5.jpeg', '2022-11-14 15:58:45');
 
 -- Dumping structure for table iconnect.tbl_sms_logs
-DROP TABLE IF EXISTS `tbl_sms_logs`;
 CREATE TABLE IF NOT EXISTS `tbl_sms_logs` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `receiverid` bigint NOT NULL DEFAULT '0',
   `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_sms_logs: ~58 rows (approximately)
+-- Dumping data for table iconnect.tbl_sms_logs: ~32 rows (approximately)
 DELETE FROM `tbl_sms_logs`;
 INSERT INTO `tbl_sms_logs` (`id`, `receiverid`, `message`, `created_at`) VALUES
-	(1, 9, 'LocalMJob \nVerification code: 354494', '2022-11-14 02:13:39'),
-	(2, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 02:46:19'),
-	(3, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 02:57:13'),
-	(4, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 02:57:20'),
-	(5, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 03:00:29'),
-	(6, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"09093939705"}', '2022-11-14 03:00:29'),
-	(7, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 03:02:03'),
-	(8, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"09755983121"}', '2022-11-14 03:02:03'),
-	(9, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 03:03:28'),
-	(10, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"09755983121"}', '2022-11-14 03:03:28'),
-	(11, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":411,"name":"ERR_INVALID_RECEIVER_NUMBER","description":"Receivers number are invalid."}}\n', '2022-11-14 03:03:29'),
-	(12, 9, '{"type":"USD","amount":25.225988}', '2022-11-14 03:07:46'),
-	(13, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:07:46'),
-	(14, 9, '{"request_id":"5nRJwCgt95yfmq9qXl94nL16683952663747","number":"639755983121","price":0.006}', '2022-11-14 03:07:46'),
-	(15, 9, '{"type":"USD","amount":25.219988}', '2022-11-14 03:15:06'),
-	(16, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:15:06'),
-	(17, 9, '{"request_id":"5nRJwCgt95yfmq9qXl9TKR16683957064531","number":"639755983121","price":0.006}', '2022-11-14 03:15:06'),
-	(18, 9, '{"type":"USD","amount":25.213988}', '2022-11-14 03:16:01'),
-	(19, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:16:01'),
-	(20, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 03:16:01'),
-	(21, 9, '{"type":"USD","amount":25.213988}', '2022-11-14 03:22:22'),
-	(22, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:22:22'),
-	(23, 9, '{"request_id":"5nRJwCgt95yfmq9qXl9rMw16683961428938","number":"639755983121","price":0.006}', '2022-11-14 03:22:22'),
-	(24, 9, '{"type":"USD","amount":25.207988}', '2022-11-14 03:23:51'),
-	(25, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:23:51'),
-	(26, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 03:23:51'),
-	(27, 9, '{"type":"USD","amount":25.207988}', '2022-11-14 03:25:16'),
-	(28, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:25:16'),
-	(29, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 03:25:16'),
-	(30, 9, '{"type":"USD","amount":25.207988}', '2022-11-14 03:27:23'),
-	(31, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:27:23'),
-	(32, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 03:27:23'),
-	(33, 9, '{"type":"USD","amount":25.207988}', '2022-11-14 03:37:14'),
-	(34, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:37:14'),
-	(35, 9, '{"request_id":"5nRJwCgt95yfmq9qXlAhFy16683970342838","number":"639755983121","price":0.006}', '2022-11-14 03:37:14'),
-	(36, 9, '{"type":"USD","amount":25.201988}', '2022-11-14 03:39:32'),
-	(37, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:39:32'),
-	(38, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 03:39:32'),
-	(39, 9, '{"type":"USD","amount":25.201988}', '2022-11-14 03:42:48'),
-	(40, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 03:42:48'),
-	(41, 9, '{"request_id":"5nRJwCgt95yfmq9qXlB1lv16683973682073","number":"639755983121","price":0.006}', '2022-11-14 03:42:48'),
-	(42, 9, '{"type":"USD","amount":25.171988}', '2022-11-14 14:00:30'),
-	(43, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 14:00:30'),
-	(44, 9, '{"request_id":"5nRJwCgt95yfmq9qXly1SB16684344287422","number":"639755983121","price":0.006}', '2022-11-14 14:00:30'),
-	(45, 9, '{"type":"USD","amount":25.165988}', '2022-11-14 14:04:04'),
-	(46, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 14:04:04'),
-	(47, 9, 'Client error: `POST https://api.movider.co/v1/verify` resulted in a `400 Bad Request` response:\n{"error":{"code":441,"name":"ERR_NUMBER_IS_VERIFYING","description":"The receiver number is verifying."}}\n', '2022-11-14 14:04:04'),
-	(48, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","request_id":"5nRJwCgt95yfmq9qXly1SB16684344287422","code":"109933"}', '2022-11-14 14:06:14'),
-	(49, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","request_id":"5nRJwCgt95yfmq9qXly1SB16684344287422","code":"109933"}', '2022-11-14 14:09:34'),
-	(50, 9, '{"type":"USD","amount":25.165988}', '2022-11-14 14:09:38'),
-	(51, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309755983121"}', '2022-11-14 14:09:38'),
-	(52, 9, '{"request_id":"5nRJwCgt95yfmq9qXlyjW216684349778122","number":"639755983121","price":0.006}', '2022-11-14 14:09:38'),
-	(53, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","request_id":"5nRJwCgt95yfmq9qXlyjW216684349778122","code":"210193"}', '2022-11-14 14:10:34'),
-	(54, 9, '{"request_id":"5nRJwCgt95yfmq9qXlyjW216684349778122","price":0.006}', '2022-11-14 14:10:35'),
-	(55, 8, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"You`re hired, Hello client client, We see your resume and you have good potential for this kind of job Back End Developer , Please contact us on 09093939708. - Fux Devs.","to":"+6309486502742"}', '2022-11-14 15:27:14'),
-	(56, 8, '{"remaining_balance":25.147988,"total_sms":2,"phone_number_list":[{"number":"639486502742","message_id":"5nRJwCgt95yfmq9qXm4Ae016684396336512","price":0.012}],"bad_phone_number_list":[]}', '2022-11-14 15:27:14'),
-	(57, 12, '{"type":"USD","amount":25.147988}', '2022-11-14 15:56:48'),
-	(58, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","code_length":"6","language":"en-us","pin_expire":"300","to":"+6309486502742"}', '2022-11-14 15:56:48'),
-	(59, 12, '{"request_id":"5nRJwCgt95yfmq9qXm69fL16684414075689","number":"639486502742","price":0.006}', '2022-11-14 15:56:49'),
-	(60, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","request_id":"5nRJwCgt95yfmq9qXm69fL16684414075689","code":"037016"}', '2022-11-14 15:57:12'),
-	(61, 12, '{"request_id":"5nRJwCgt95yfmq9qXm69fL16684414075689","price":0.006}', '2022-11-14 15:57:12'),
-	(62, 8, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"Hello client client, Your application for this position Back End Developer was declined - Fux Devs.","to":"+6309486502742"}', '2022-11-15 01:54:19'),
-	(63, 8, '{"remaining_balance":25.135988,"total_sms":1,"phone_number_list":[{"number":"639486502742","message_id":"5nRJwCgt95yfmq9qXmaNc216684772578016","price":0.006}],"bad_phone_number_list":[]}', '2022-11-15 01:54:20'),
-	(64, 8, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"You`re hired, Hello client client, We see your resume and you have good potential for this kind of job Back End Developer , Please contact us on 09093939708. - Fux Devs.","to":"+6309486502742"}', '2022-11-15 01:54:23'),
-	(65, 8, '{"remaining_balance":25.123988,"total_sms":2,"phone_number_list":[{"number":"639486502742","message_id":"5nRJwCgt95yfmq9qXmaNtW16684772615483","price":0.012}],"bad_phone_number_list":[]}', '2022-11-15 01:54:24');
+	(69, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job PHP PROGRAMMER .","to":"+6309755983121"}', '2022-11-28 17:22:50'),
+	(70, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 17:22:51'),
+	(71, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job PHP PROGRAMMER .","to":"+6309486502742"}', '2022-11-28 17:22:51'),
+	(72, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 17:22:52'),
+	(73, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testinggggffff.","to":"+6309755983121"}', '2022-11-28 18:18:25'),
+	(74, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:18:26'),
+	(75, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testinggggffff.","to":"+6309486502742"}', '2022-11-28 18:18:26'),
+	(76, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:18:26'),
+	(77, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer.","to":"+6309755983121"}', '2022-11-28 18:25:27'),
+	(78, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:25:27'),
+	(79, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer.","to":"+6309486502742"}', '2022-11-28 18:25:27'),
+	(80, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:25:28'),
+	(81, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testindsafdasfadsf.","to":"+6309755983121"}', '2022-11-28 18:26:31'),
+	(82, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:26:31'),
+	(83, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testindsafdasfadsf.","to":"+6309486502742"}', '2022-11-28 18:26:31'),
+	(84, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:26:31'),
+	(85, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer TAE.","to":"+6309755983121"}', '2022-11-28 18:33:44'),
+	(86, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:33:44'),
+	(87, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer TAE.","to":"+6309486502742"}', '2022-11-28 18:33:45'),
+	(88, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:33:45'),
+	(89, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job TESTIN tae.","to":"+6309755983121"}', '2022-11-28 18:34:21'),
+	(90, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:34:21'),
+	(91, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job TESTIN tae.","to":"+6309486502742"}', '2022-11-28 18:34:22'),
+	(92, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:34:22'),
+	(93, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testingggg TAEEEEE.","to":"+6309755983121"}', '2022-11-28 18:34:55'),
+	(94, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:34:55'),
+	(95, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testingggg TAEEEEE.","to":"+6309486502742"}', '2022-11-28 18:34:55'),
+	(96, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:34:56'),
+	(97, 9, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello client1, Fux Devs has new open job Web Developer Testingggg fsdgfdsgfsdg.","to":"+6309755983121"}', '2022-11-28 18:35:22'),
+	(98, 9, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:35:22'),
+	(99, 12, '{"api_key":"2H7GtWOeyWYMff0XzK7en5zEdy6","api_secret":"m0hv1Nw4C0949gsL9RGVRIp75QomqWsLqD5fjpjB","from":"iConnect","text":"LocalMJob \n Hello marvin, Fux Devs has new open job Web Developer Testingggg fsdgfdsgfsdg.","to":"+6309486502742"}', '2022-11-28 18:35:22'),
+	(100, 12, 'Client error: `POST https://api.movider.co/v1/sms` resulted in a `401 Unauthorized` response:\n{"error":{"code":403,"name":"ERR_AUTHENTICATION_FAILED","description":"Authentication field."}}\n', '2022-11-28 18:35:22');
 
 -- Dumping structure for table iconnect.tbl_verificationcode
-DROP TABLE IF EXISTS `tbl_verificationcode`;
 CREATE TABLE IF NOT EXISTS `tbl_verificationcode` (
   `id` int NOT NULL AUTO_INCREMENT,
   `session` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -283,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `tbl_verificationcode` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table iconnect.tbl_verificationcode: ~4 rows (approximately)
+-- Dumping data for table iconnect.tbl_verificationcode: ~5 rows (approximately)
 DELETE FROM `tbl_verificationcode`;
 INSERT INTO `tbl_verificationcode` (`id`, `session`, `code`, `status`, `used_at`, `created_at`) VALUES
 	(17, 'dd3d05d7de99af7a376db3aaf6a18dba', '484709', 1, '2022-09-01 21:34:41', '2022-09-01 21:33:54'),
