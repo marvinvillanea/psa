@@ -1,61 +1,3 @@
-<?php 
-session_start();
-require_once '../../config.php';
-require_once '../../functions.php';
-require_once '../../session.php';
-
-setlocale(LC_MONETARY,"en_US");
-
-if($islogin){
-    if($u_type == 2){
-        $page = (form("page")) ? value("page") : "dashboard";
-
-        $load_jobs = mysqli_query($con,"SELECT * FROM `tbl_jobs` WHERE userid = $u_id");
-        $count_jobs = mysqli_num_rows($load_jobs);
-
-        if(form("manage")){
-            $update = true;
-            $id = mysqli_value($con,"manage");
-            if(is_numeric($id)){
-                $manage_Job = mysqli_query($con,"SELECT * FROM `tbl_jobs` WHERE id = $id");
-                if(hasResult($manage_Job)){
-                    $data = mysqli_fetch_assoc($manage_Job);
-                }else{
-                    $update = false;
-                }
-            }else{
-                $update = false;
-            }
-        }else{
-            $update = false;
-        }
-
-        if(form("filter") && value("sub") == "applicants"){
-            $filter = strtolower(mysqli_value($con,"filter"));
-            if($filter == "pending"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at, facebook, linkedin, instagram, degree_title, school_name,school_year_attended  FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 1");
-            }elseif($filter == "hired"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at  , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 2");
-            }elseif($filter == "declined"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.email,tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 3");
-            }else{
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id");
-            }
-
-
-        }else{
-            $filter = "all";
-            $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.email,tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_accounts.email, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id");
-        }
-
-        $count_applicants = mysqli_num_rows($load_applicants);
-    }else{
-        navigate("../../");
-    }
-}else{
-    navigate("../../");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -143,7 +85,64 @@ if($islogin){
     </style>
 </head>
 <body>
+<?php 
+session_start();
+require_once '../../config.php';
+require_once '../../functions.php';
+require_once '../../session.php';
 
+setlocale(LC_MONETARY,"en_US");
+
+if($islogin){
+    if($u_type == 2){
+        $page = (form("page")) ? value("page") : "dashboard";
+
+        $load_jobs = mysqli_query($con,"SELECT * FROM `tbl_jobs` WHERE userid = $u_id");
+        $count_jobs = mysqli_num_rows($load_jobs);
+
+        if(form("manage")){
+            $update = true;
+            $id = mysqli_value($con,"manage");
+            if(is_numeric($id)){
+                $manage_Job = mysqli_query($con,"SELECT * FROM `tbl_jobs` WHERE id = $id");
+                if(hasResult($manage_Job)){
+                    $data = mysqli_fetch_assoc($manage_Job);
+                }else{
+                    $update = false;
+                }
+            }else{
+                $update = false;
+            }
+        }else{
+            $update = false;
+        }
+
+        if(form("filter") && value("sub") == "applicants"){
+            $filter = strtolower(mysqli_value($con,"filter"));
+            if($filter == "pending"){
+                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at, facebook, linkedin, instagram, degree_title, school_name,school_year_attended  FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 1");
+            }elseif($filter == "hired"){
+                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at  , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 2");
+            }elseif($filter == "declined"){
+                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.email,tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id AND  tbl_applicants.status = 3");
+            }else{
+                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid,tbl_accounts.email, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id");
+            }
+
+
+        }else{
+            $filter = "all";
+            $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.email,tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_accounts.email, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at , facebook, linkedin, instagram, degree_title, school_name,school_year_attended FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.companyid = $c_id");
+        }
+
+        $count_applicants = mysqli_num_rows($load_applicants);
+    }else{
+        navigate("../../");
+    }
+}else{
+    navigate("../../");
+}
+?>
     <div class="main">
         <div class="header">
             <div class="box">
@@ -320,7 +319,7 @@ if($islogin){
                                             <a href="?page=hire&sub=postajob&manage=<?= $row["id"]?>" class="box">
                                                 <div class="text">
                                                     <p class="name"><?= $row['j_name']; ?></p>
-                                                    <p class="salary_range"><?= $row["j_currency_symbol"]." ".number_format($row['j_min'])." - ".$row["j_currency_symbol"]." ".number_format($row['j_max']) ?></p>
+                                                    <p class="salary_range">&#8369; <?= number_format($row['j_min']).' - &#8369; '.number_format($row['j_max']) ?></p>
                                                     <p class="posted_at"><?= date("m/d/Y",strtotime($row["j_created_at"]))?></p>
                                                 </div>
                                                 <i class="fa fa-angle-right"></i>
@@ -484,7 +483,7 @@ if($islogin){
                                                         </button>
                                                        
 
-                                                       <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                       <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>', this.id)">
                                                                 <i class="fa fa-file-text-o"></i>   VIEW RESUME
                                                         </button>
 
@@ -501,7 +500,7 @@ if($islogin){
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
                                                         </a> -->
-                                                          <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                          <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>', this.id)">
                                                                 <i class="fa fa-file-text-o"></i>   VIEW RESUME
                                                         </button>
 
@@ -518,7 +517,7 @@ if($islogin){
                                                             <i class="fa fa-file-text-o"></i>
                                                             DOWNLOAD RESUME
                                                         </a> -->
-                                                         <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="../../resume/<?= $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('../../resume/<?= $row["resume"] ?>', this.id)">
+                                                         <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>" id="mybtn<?= $row["id"] ?>" onclick="showModal('<?= getMyUrl().'/iconnect/resume/'.  $row["resume"] ?>', this.id)">
                                                                 <i class="fa fa-file-text-o"></i>   VIEW RESUME
                                                         </button>
                                                     <?php }?>
@@ -736,8 +735,7 @@ if($islogin){
     
     <div class="content">
         <div class="embed-container">
-           <iframe src="" width="560"
-      height="315" frameborder="0"  onload="resizeIframe(this)" id="documentsDetails"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" loading="lazy">
+           <iframe src=""  frameborder="0"  onload="resizeIframe(this)" id="documentsDetails"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" loading="lazy" style="height: 1300px;">
              </iframe>
        </div>
     </div>
@@ -810,7 +808,7 @@ function showModal(documentDetails, getID){
 
     // // When the user clicks on the button, open the modal
     document.getElementById("documentsDetails").src = documentDetails;
-
+    document.getElementById("documentsDetails").style.height = "1363px";
 }
 
 function closeModal(){
