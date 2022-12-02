@@ -141,8 +141,8 @@ if(form("search")){
                                                 <?= $row["c_name"]?>
                                             </p>
                                             <p>
-                                                <i class="fa fa-money"></i>
-                                                <?= $row["j_currency_symbol"]." ".number_format($row['j_min'])." - ".$row["j_currency_symbol"]." ".number_format($row['j_max']) ?>
+                                                <i class="fa fa-money"></i> &#8369; 
+                                                <?= number_format($row['j_min'])." - &#8369;  ".number_format($row['j_max']) ?>
                                             </p>
                                             <p>
                                                 <i class="fa fa-calendar"></i>

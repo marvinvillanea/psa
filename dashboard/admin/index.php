@@ -249,7 +249,7 @@ if($islogin){
                         <div class="box_count">
                             <?= $count_jobs ?>
                         </div>
-                        <a href="./?page=hire&sub=list">
+                        <a href="./?page=hire&sub=jobs">
                             VIEW
                         </a>
                     </div>
@@ -271,7 +271,7 @@ if($islogin){
                         <div class="box_count">
                             <?= $count_company ?>
                         </div>
-                        <a href="?page=hire&sub=applicants">
+                        <a href="?page=hire&sub=company">
                             VIEW
                         </a>
                     </div>
@@ -308,7 +308,7 @@ if($islogin){
                                             <div class="box">
                                                 <div class="text">
                                                     <p class="name"><?= $row['j_name']; ?></p>
-                                                    <p class="salary_range"><?= $row["j_currency_symbol"]." ".number_format($row['j_min'])." - ".$row["j_currency_symbol"]." ".number_format($row['j_max']) ?></p>
+                                                    <p class="salary_range">&#8369; <?= number_format($row['j_min']).' - &#8369; '.number_format($row['j_max']) ?></p>
                                                     <p class="posted_at"><?= date("m/d/Y",strtotime($row["j_created_at"]))?></p>
                                                 </div>
                                                 <!-- <i class="fa fa-angle-right"></i> -->
