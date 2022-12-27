@@ -1,7 +1,7 @@
 $(document).ready(() => {
-    $(".post_job").on("submit",(e) => {
+    $(".add_jobs").on("submit",(e) => {
         e.preventDefault();
-        var data = $('.post_job').serializeArray()
+        var data = $('.add_jobs').serializeArray()
         $.ajax({
             url : "./routes/post_job.php",
             method: "post",
@@ -13,10 +13,10 @@ $(document).ready(() => {
                         'Success',
                         `${res.message}`,
                         'success'
-                    ) 
+                    )
                     setTimeout(() => {
-                        window.location.href = "?page=hire&sub=list"
-                    }, 500);
+                        window.location.href = "?page=jobs&sub=all_list"
+                    }, 1000);
                 }else{
                     Swal.fire(
                         'Failed',

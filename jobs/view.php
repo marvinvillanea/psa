@@ -8,15 +8,16 @@ $report = false;
 $apply = false;
 
 if(form("id")){
-    if(!$islogin){
-        navigate("../auth/?a=already");
-    }
+    // if(!$islogin){
+    //     navigate("../auth/?a=already");
+    // }
 
     $id = mysqli_value($con,"id");
 
     $result_query = mysqli_query($con,"
     SELECT
         tbl_jobs.id,
+        tbl_jobs.j_number_of_vacancy,
         tbl_company.id as 'c_id',
         tbl_company.c_name,
         tbl_company.c_address,
@@ -48,36 +49,36 @@ if(form("id")){
 
     if(form("apply")){
         //check if the user is fully verified.
-        $apply = true;
-        if($u_verification_state == 2){
-            $fully_verified = true;
+        // $apply = true;
+        // if($u_verification_state == 2){
+        //     $fully_verified = true;
 
-            $job_id = $data["id"];
-            $company_id = $data["c_id"];
+        //     $job_id = $data["id"];
+        //     $company_id = $data["c_id"];
             
-            $check_application = mysqli_query($con,"SELECT * FROM `tbl_applicants` WHERE `companyid` = $company_id AND `applicantsid` = $u_id AND `jobid` = $job_id ");
-            if(hasResult($check_application)){
-                $already_submited = true;
-            }else{
-                $submit_application = mysqli_query($con,"
-                INSERT INTO `tbl_applicants`(
-                    `companyid`,
-                    `applicantsid`,
-                    `jobid`
-                )
-                VALUES(
-                    $company_id,
-                    $u_id,
-                    $job_id
-                )
-                ");
-                $sms_message = ucwords($data["lastname"].', '.$data["firstname"]). ", Applying for  ".ucwords($data["j_name"]);
-                createNotify($con, $data["userid"], $sms_message, 0);
-                $already_submited = false;
-            }
-        }else{
-            $fully_verified = false;
-        }
+        //     $check_application = mysqli_query($con,"SELECT * FROM `tbl_applicants` WHERE `companyid` = $company_id AND `applicantsid` = $u_id AND `jobid` = $job_id ");
+        //     if(hasResult($check_application)){
+        //         $already_submited = true;
+        //     }else{
+        //         $submit_application = mysqli_query($con,"
+        //         INSERT INTO `tbl_applicants`(
+        //             `companyid`,
+        //             `applicantsid`,
+        //             `jobid`
+        //         )
+        //         VALUES(
+        //             $company_id,
+        //             $u_id,
+        //             $job_id
+        //         )
+        //         ");
+        //         $sms_message = ucwords($data["lastname"].', '.$data["firstname"]). ", Applying for  ".ucwords($data["j_name"]);
+        //         createNotify($con, $data["userid"], $sms_message, 0);
+        //         $already_submited = false;
+        //     }
+        // }else{
+        //     $fully_verified = false;
+        // }
     }else{
         $apply = false;
     }
@@ -94,8 +95,9 @@ if(form("id")){
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/logo.png" >
-    <title>LocalMJob - JOBS</title>
+    <!-- <link rel="icon" href="../assets/logo.png" > -->
+    <link rel="icon" href="../assets/psa_logo.png" >
+    <title>PSA - Jobs</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -168,16 +170,8 @@ if(form("id")){
                         </div>
                         <div class="box_header_sub">
                             <p>
-                                <i class="fa fa-building"></i>
-                                <?= $data["c_name"]?>
-                            </p>
-                            <p>
-                                <i class="fa fa-map-marker"></i>    
-                                <?= $data["c_address"]?>
-                            </p>
-                            <p>
-                                <i class="fa fa-money"></i>
-                                <?= $data["j_currency_symbol"]." ".number_format($data['j_min'])." - ".$data["j_currency_symbol"]." ".number_format($data['j_max']) ?>
+                                <i class="fa fa-users"></i> Vacancy
+                                <?= $data["j_number_of_vacancy"] ?>
                             </p>
                             <p>
                                 <i class="fa fa-calendar"></i>
@@ -194,10 +188,6 @@ if(form("id")){
                         <a href="?id=<?= $data["id"] ?>&apply=<?= $data["id"] ?>" class="btn_applynow">
                             <i class="fa fa-file-text-o"></i>
                             APPLY NOW
-                        </a>
-                        <a href="?report=<?= $data["c_id"] ?>" class="btn_applynow">
-                            <i class="fa fa-exclamation-triangle"></i>
-                            REPORT
                         </a>
                     </div>
             </div>

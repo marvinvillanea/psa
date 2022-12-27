@@ -12,8 +12,8 @@
 <div class="header">
     <div class="text">
         <a href="/<?= $__name__ ?>" class="header_logo">
-            <img src="/<?= $__name__ ?>/assets/peso_logo_one.gif" alt="logo">
-            <p>LocalMJob</p>
+            <img src="/<?= $__name__ ?>/assets/psa_logo.png" alt="logo">
+            <p>Philippine Statistics Authority</p>
         </a>
         <label for="navigation-toggle" class="toggle-nav-btn">
             <i class="fa fa-bars"></i>

@@ -14,6 +14,7 @@ if(form("search")){
     SELECT
        
         tbl_jobs.id,
+        tbl_jobs.j_number_of_vacancy,
         tbl_company.c_name,
         tbl_company.c_address,
         tbl_company.c_cnum,
@@ -43,6 +44,7 @@ if(form("search")){
         $result_query = mysqli_query($con,"
         SELECT
             tbl_jobs.id,
+            tbl_jobs.j_number_of_vacancy,
             tbl_company.c_name,
             tbl_company.c_address,
             tbl_company.c_cnum,
@@ -66,6 +68,7 @@ if(form("search")){
         $result_query = mysqli_query($con,"
         SELECT
             tbl_jobs.id,
+            tbl_jobs.j_number_of_vacancy,
             tbl_company.c_name,
             tbl_company.c_address,
             tbl_company.c_cnum,
@@ -93,7 +96,7 @@ if(form("search")){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/logo.png" >
-    <title>LocalMJob - JOBS</title>
+    <title>PSA - Jobs</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -137,12 +140,8 @@ if(form("search")){
                                         </div>
                                         <div class="box_header_sub">
                                             <p>
-                                                <i class="fa fa-building"></i>
-                                                <?= $row["c_name"]?>
-                                            </p>
-                                            <p>
-                                                <i class="fa fa-money"></i> &#8369; 
-                                                <?= number_format($row['j_min'])." - &#8369;  ".number_format($row['j_max']) ?>
+                                                <i class="fa fa-users"></i> Vacancy
+                                                <?= $row["j_number_of_vacancy"] ?>
                                             </p>
                                             <p>
                                                 <i class="fa fa-calendar"></i>

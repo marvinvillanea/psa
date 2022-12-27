@@ -9,126 +9,6 @@ setlocale(LC_MONETARY,"en_US");
 if($islogin){
     if($u_type == 1){
         $page = (form("page")) ? value("page") : "dashboard";
-
-        $load_jobs = mysqli_query($con,"SELECT * FROM `tbl_jobs`");
-        $count_jobs = mysqli_num_rows($load_jobs);
-
-        $load_company = mysqli_query($con,"SELECT * FROM `tbl_company`");
-        $count_company = mysqli_num_rows($load_company);
-
-        if(form("manage")){
-            $update = true;
-            $id = mysqli_value($con,"manage");
-            if(is_numeric($id)){
-                $manage_Job = mysqli_query($con,"SELECT * FROM `tbl_jobs`");
-                if(hasResult($manage_Job)){
-                    $data = mysqli_fetch_assoc($manage_Job);
-                }else{
-                    $update = false;
-                }
-            }else{
-                $update = false;
-            }
-        }else{
-            $update = false;
-        }
-
-        if(form("filter") && value("sub") == "applicants"){
-            $filter = strtolower(mysqli_value($con,"filter"));
-            if($filter == "pending"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.status = 1");
-            }elseif($filter == "hired"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.status = 2");
-            }elseif($filter == "declined"){
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid WHERE tbl_applicants.status = 3");
-            }else{
-                $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid");
-            }
-        }else{
-            $filter = "all";
-            $load_applicants = mysqli_query($con,"SELECT tbl_applicants.id, tbl_applicants.applicantsid, tbl_accounts.firstname, tbl_accounts.lastname, tbl_accounts.cnum, tbl_accounts.bday, tbl_accounts.address, tbl_accounts.age, tbl_resume.path AS 'resume', tbl_applicants.companyid, tbl_applicants.jobid, tbl_jobs.j_name, tbl_applicants.status, tbl_applicants.created_at FROM tbl_applicants INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_applicants.applicantsid INNER JOIN tbl_resume ON tbl_resume.userid = tbl_applicants.applicantsid INNER JOIN tbl_jobs ON tbl_jobs.id = tbl_applicants.jobid");
-        }
-
-        $count_applicants = mysqli_num_rows($load_applicants);
-
-        if(form("view") && value("sub") == "company"){
-            $company_id = mysqli_value($con,"view");
-
-            if(is_numeric($company_id)){
-                $validate_company = mysqli_query($con,"
-                SELECT
-                    tbl_accounts.firstname,
-                    tbl_accounts.lastname,
-                    tbl_company.*
-                FROM
-                    `tbl_company`
-                INNER JOIN tbl_accounts ON
-                    tbl_accounts.id = tbl_company.userid
-                WHERE
-                    tbl_company.id =  $company_id
-                ");
-                if(hasResult($validate_company)){
-                    $company_view = true;
-                    $data = mysqli_fetch_assoc($validate_company);
-
-                    $publisher_name = $data["firstname"]." ".$data["lastname"];
-                    $company_name = $data["c_name"];
-                    $company_address = $data["c_address"];
-                    $company_cnum = $data["c_cnum"];
-                    $company_position = $data["c_position"];
-                    $company_created_at = $data["created_at"];
-
-
-                    $load_company_reports = mysqli_query($con,"
-                        SELECT
-                            tbl_accounts.firstname,
-                            tbl_accounts.lastname,
-                            tbl_company_reports.*
-                        FROM
-                            `tbl_company_reports`
-                        INNER JOIN tbl_accounts ON
-                            tbl_accounts.id = tbl_company_reports.reported_by
-                        WHERE
-                            `company_id` = $company_id
-                    ");
-                }else{
-                    $company_view = false;
-                }
-            }else{
-                $company_view = false;
-            }
-        }else{
-            $company_view = false;
-        }
-
-       
-
-        if(form("filter") && value("sub") == "list" && value("page") == "accounts"){
-            $filter = strtolower(mysqli_value($con,"filter"));
-
-            if($filter == "all"){
-                $load_accounts = mysqli_query($con,"SELECT * FROM `tbl_accounts`");
-            }else{
-                function filter($filter){
-                    if($filter == "admin"){
-                        return 1;
-                    }
-                    if($filter == "company"){
-                        return 2;
-                    }
-                    if($filter == "client"){
-                        return 3;
-                    }
-                }
-    
-                $account_type = filter($filter);
-    
-                $load_accounts = mysqli_query($con,"SELECT * FROM `tbl_accounts` WHERE type = $account_type");
-            }
-        }else{
-            $filter = "all";
-            $load_accounts = mysqli_query($con,"SELECT * FROM `tbl_accounts`");
-        }
     }else{
         navigate("../../");
     }
@@ -164,19 +44,41 @@ if($islogin){
         <div class="header">
             <div class="box">
                 <a href="../../" class="header_logo">
-                    <img src="../../assets/peso_logo_one.gif" alt="logo">
-                    <p>CONNECT</p>
+                    <img src="../../assets/psa_logo.png" alt="logo">
+                    <p>PSA</p>
                 </a>
-                <span></span>
+               
                 <div class="navigation desktop_icon_profile">
-                    <a href="?page=dashboard">
+                    <a href="?page=dashboard" cals>
                         Dashboard
                     </a>
-                    <a href="?page=hire">
-                        Company
+                    <span style="color:white;">|</span>
+                    <a href="?page=jobs&sub=all_list">
+                        Job's
                     </a>
-                    <a href="?page=accounts">
-                        Accounts
+                    <span style="color:white;">|</span>
+                    <a href="?page=applicants&sub=all_list">
+                        Applicants
+                    </a>
+                    <span style="color:white;">|</span>
+                     <a href="?page=employee&sub=all_list">
+                        Employee's
+                    </a>
+                    <span style="color:white;">|</span>
+                    <a href="?page=dashboard">
+                        Leave
+                    </a>
+                    <span style="color:white;">|</span>
+                     <a href="?page=dashboard">
+                        Rank & Promotions
+                    </a>
+                    <span style="color:white;">|</span>
+                    <a href="?page=dashboard">
+                        Employee's Preformance
+                    </a>
+                    <span style="color:white;">|</span>
+                    <a href="?page=dashboard">
+                        Reports
                     </a>
                 </div>
             </div>
@@ -193,7 +95,7 @@ if($islogin){
                 </button>
             </div>
         </div>
-        <div class="body" id="body_page_<?= $page ?>">
+        <div class="body" id="body_page_<?= ($page == "dashboard") ? $page : "default" ?>">
             <div class="profile_box" style="display:none">
                  <div class="hambuger_menu_desktop">
                     <div class="profile_box_header">
@@ -239,44 +141,18 @@ if($islogin){
                 </div>
                 
             </div>
-            <?php if($page == "dashboard"){?>
-                <h2>Hi, <?= $u_fname." ". $u_lname ?> 👋</h2>
-                <div class="dashboard">
-                    <div class="box">
-                        <div class="box_name">
-                            Open Jobs
-                        </div>
-                        <div class="box_count">
-                            <?= $count_jobs ?>
-                        </div>
-                        <a href="./?page=hire&sub=jobs">
-                            VIEW
-                        </a>
-                    </div>
-                    <div class="box">
-                        <div class="box_name">
-                            Applicants
-                        </div>
-                        <div class="box_count">
-                            <?= $count_applicants ?>
-                        </div>
-                        <a href="?page=hire&sub=applicants">
-                            VIEW
-                        </a>
-                    </div>
-                    <div class="box">
-                        <div class="box_name">
-                            Companies
-                        </div>
-                        <div class="box_count">
-                            <?= $count_company ?>
-                        </div>
-                        <a href="?page=hire&sub=company">
-                            VIEW
-                        </a>
-                    </div>
-                </div>
-            <?php }elseif($page == "hire"){?>
+            <?php 
+                if($page == "dashboard"){
+                    require_once 'dashboard.php';
+                } elseif ($page == "jobs") {
+                    require_once 'jobs.php';
+                } elseif($page == "applicants"){
+                    require_once 'applicants.php';
+                } elseif ($page == "employee") {
+                    require_once 'employee.php';
+                }
+
+                elseif($page == "hire"){?>
                 <?php if(form("sub")){?>
                     <div class="sidebar">
                         <a href="?page=hire&sub=company" <?= (value("sub") == "company") ? 'class="active"' : "" ?>>

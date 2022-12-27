@@ -20,18 +20,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $id = mysqli_value($con,"id");
 
-    $select_company = mysqli_query($con,"
-        SELECT * FROM `tbl_company` WHERE `id` =  $id
-    ");
-
-    $data = mysqli_fetch_assoc($select_company);
-
-    $userid = $data["userid"];
-
-    $delete = mysqli_query($con,"DELETE FROM `tbl_company` WHERE `userid` =  $userid");
-    $delete = mysqli_query($con,"DELETE FROM `tbl_jobs` WHERE `userid` =  $userid");
-    $delete = mysqli_query($con,"DELETE FROM `tbl_resume` WHERE `userid` =  $userid");
-    $delete = mysqli_query($con,"DELETE FROM `tbl_accounts` WHERE `id` =  $userid");
+    $delete = mysqli_query($con,"DELETE FROM `tbl_jobs` WHERE `id` =  $id);
 
     if($delete){
         message(true,"Successfully deleted.");

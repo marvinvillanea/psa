@@ -8,11 +8,8 @@ require_once '../../../session.php';
 header("Content-Type: application/json");
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $position_name = mysqli_value($con,"position_name");
-    $position_age = mysqli_value($con,"position_age");
-    $minimum_salary = mysqli_value($con,"minimum_salary");
-    $maximum_salary = mysqli_value($con,"maximum_salary");
-    $currency_symbol = mysqli_value($con,"currency_symbol");
+    $title_job = mysqli_value($con,"title_job");
+    $no_vacancy = mysqli_value($con,"no_vacancy");
     $description = mysqli_value($con,"description");
 
     function message($status,$message){
@@ -24,44 +21,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         die();
     }
 
-    if($position_name == ""){
-        message(false, "Please enter the position name.");
+    if($title_job == ""){
+        message(false, "Please enter the Title.");
     }
-    if($position_age == ""){
-        message(false, "Please enter the qualification age.");
-    }elseif($position_age < 18){
-        message(false, "The qualification age must be 18 years old and above.");
-    }
-    if($minimum_salary == ""){
-        message(false, "Please enter the minimum salary.");
-    }
-    if($maximum_salary == ""){
-        message(false, "Please enter the maximum salary.");
-    }
-    if($currency_symbol == ""){
-        message(false, "Please select currency symbol.");
+    if($no_vacancy == ""){
+        message(false, "Please enter the No. Vacancy.");
     }
     if($description == ""){
-        message(false, "Please enter the job description.");
+        message(false, "Are you sure you want to save? Please check the save button again. Thank you");
     }
 
     $save_query = mysqli_query($con,"
     INSERT INTO `tbl_jobs`(
         `userid`,
         `j_name`,
-        `j_age`,
-        `j_min`,
-        `j_max`,
-        `j_currency_symbol`,
+        `j_number_of_vacancy`,
         `j_description`
     )
     VALUES(
         $u_id,
-        '$position_name',
-        $position_age,
-        $minimum_salary,
-        $maximum_salary,
-        '$currency_symbol',
+        '$title_job',
+        '$no_vacancy',
         '$description'
     )
     ");

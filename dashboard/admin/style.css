@@ -43,8 +43,8 @@ button{
     gap: .5rem;
 }
 .header span{
-    width: 1px;
-    background: rgb(160, 160, 160);
+   /* width: 1px;
+    background: rgb(160, 160, 160);*/
 }
 .header_logo img{
     width: 50px;
@@ -232,41 +232,41 @@ button{
     padding: 1rem;
     border-bottom: 1px rgb(204, 204, 204) solid;
 }
-#showcase_sub_postajob .container .container_body{
+#showcase_sub_all_list .container .container_body{
     padding: 1rem;
 }
-#showcase_sub_postajob form{
+#showcase_sub_all_list form{
     display: flex;
     flex-direction: column;
     gap: .5rem;
 }
-#showcase_sub_postajob form .field{
+#showcase_sub_all_list form .field{
     display: flex;
     flex-direction: column;
 }
-#showcase_sub_postajob form .field input,textarea,select{
+#showcase_sub_all_list form .field input,textarea,select{
     outline: none;
     padding: .5rem;
     border: 1px rgb(204, 204, 204) solid;
 }
-#showcase_sub_postajob form .field input:focus,textarea:focus,select:focus{
+#showcase_sub_all_list form .field input:focus,textarea:focus,select:focus{
     border-color: #623ADA;
 }
-#showcase_sub_postajob form .field textarea{
+#showcase_sub_all_list form .field textarea{
     resize: none;
     height: 200px;
 }
-#showcase_sub_postajob form .btn_submit{
+#showcase_sub_all_list form .btn_submit{
     margin-top: 1rem;
     height: 50px;
     color: white;
     background: #673DE6;
     border-radius: .5rem;
 }
-#showcase_sub_postajob form .btn_submit:hover{
+#showcase_sub_all_list form .btn_submit:hover{
     background: #623ADA;
 }
-#showcase_sub_postajob .btn_delete_job{
+#showcase_sub_all_list .btn_delete_job{
     width: 100%;
     margin-top: .5rem;
     height: 50px;
@@ -274,7 +274,7 @@ button{
     background: #FF5876;
     border-radius: .5rem;
 }
-#showcase_sub_postajob .btn_delete_job:hover{
+#showcase_sub_all_list .btn_delete_job:hover{
     background: #E26178;
 }
 #showcase_sub_jobs{
@@ -322,9 +322,9 @@ button{
 #showcase_sub_jobs .container .container_body .box .text .name{
     font-size: 1.5rem;
 }
-#showcase_sub_jobs .container .container_body .box .text .salary_range{
-    font-size: 1.2rem;
-}
+/*#showcase_sub_jobs .container .container_body .box .text .salary_range{
+    font-size: 1rem;
+}*/
 #showcase_sub_jobs .container .container_body .box .text .posted_at{
     font-size: 1rem;
 }
@@ -514,78 +514,78 @@ form .button_container .button{
  form .button:hover{
     background: #623ADA;
 }
-#showcase_sub_company{
+#showcase_sub_all_list{
     display: flex;
     flex-direction: column;
 }
-#showcase_sub_company .t1{
+#showcase_sub_all_list .t1{
     margin-bottom: 2rem;
 }
-#showcase_sub_company .container{
+#showcase_sub_all_list .container{
     background: white;
     border-radius: .5rem .5rem 0 0;
     border: 1px rgb(204, 204, 204) solid;
 }
-#showcase_sub_company .container .container_title{
+#showcase_sub_all_list .container .container_title{
     color: #623ADA;
     padding: 1rem;
     border-bottom: 1px rgb(204, 204, 204) solid;
     display: flex;
     justify-content: space-between;
 }
-#showcase_sub_company .container .container_title .filter{
+#showcase_sub_all_list .container .container_title .filter{
     display:flex;
     gap: .5rem;
 }
-#showcase_sub_company .container .container_title .filter a{
+#showcase_sub_all_list .container .container_title .filter a{
     text-decoration: none;
     color: black;
 }
-#showcase_sub_company .container .container_title .filter a:hover{
+#showcase_sub_all_list .container .container_title .filter a:hover{
     color: #623ADA;
 }
-#showcase_sub_company .container .container_title .filter a.active{
+#showcase_sub_all_list .container .container_title .filter a.active{
     color: #623ADA;
 }
-#showcase_sub_company .container .container_body{
+#showcase_sub_all_list .container .container_body{
     background: white;
 }
-#showcase_sub_company .container .container_body .showcase{
+#showcase_sub_all_list .container .container_body .showcase{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-#showcase_sub_company .container .container_body .box{
+#showcase_sub_all_list .container .container_body .box{
     display: flex;
     align-items: center;
     color: black;
     padding: 1rem;
     border-bottom: 1px rgb(204, 204, 204) dashed;
 }
-#showcase_sub_company .container .container_body .box:hover{
+#showcase_sub_all_list .container .container_body .box:hover{
     color: teal;
     background: #f3f3f3;
 }
-#showcase_sub_company .container .container_body .box:last-child{
+#showcase_sub_all_list .container .container_body .box:last-child{
     border-bottom: none;
 }
-#showcase_sub_company .container .container_body .box .text{
+#showcase_sub_all_list .container .container_body .box .text{
     flex: 1;
 }
-#showcase_sub_company .container .container_body .box .text .name{
+#showcase_sub_all_list .container .container_body .box .text .name{
     font-size: 1.5rem;
 }
-#showcase_sub_company .container .container_body .box .text .salary_range{
+/*#showcase_sub_all_list .container .container_body .box .text .salary_range{
     font-size: 1.2rem;
-}
-#showcase_sub_company .container .container_body .box .text .posted_at{
+}*/
+#showcase_sub_all_list .container .container_body .box .text .posted_at{
     font-size: 1rem;
 }
-#showcase_sub_company .container .container_body .box i{
+#showcase_sub_all_list .container .container_body .box i{
     font-size: 2rem;
     margin-right: 1rem;
 }
-#showcase_sub_company .btn_delete{
+#showcase_sub_all_list .btn_delete{
     width: 100%;
     margin-top: .5rem;
     height: 50px;
@@ -593,7 +593,7 @@ form .button_container .button{
     background: #FF5876;
     border-radius: .5rem;
 }
-#showcase_sub_company .btn_delete:hover{
+#showcase_sub_all_list .btn_delete:hover{
     background: #E26178;
 }
 
@@ -628,6 +628,76 @@ form .button_container .button{
     flex: 1;
     padding: 1rem;
 }
+
+/*JOB LIST DESIGN*/
+#body_page_jobs{
+    display: flex;
+}
+#body_page_jobs .sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 1rem 0;
+    background: white;
+    width: 300px;
+    border-right: 1px rgb(204, 204, 204) solid;
+}
+#body_page_jobs .sidebar a{
+    padding: 1rem 1rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgb(160, 160, 160);
+    border-radius: 0 1rem 1rem 0;
+}
+#body_page_jobs .sidebar a:hover{
+    color: #623ADA;
+    background: #F2F3F6;
+}
+#body_page_jobs .sidebar a.active{
+    color: #623ADA;
+    background: #EBE4FF;
+}
+#body_page_jobs .showcase{
+    flex: 1;
+    padding: 1rem;
+}
+
+/*DEFAULT*/
+
+/*JOB LIST DESIGN*/
+#body_page_default{
+    display: flex;
+}
+#body_page_default .sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 1rem 0;
+    background: white;
+    width: 300px;
+    border-right: 1px rgb(204, 204, 204) solid;
+}
+#body_page_default .sidebar a{
+    padding: 1rem 1rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgb(160, 160, 160);
+    border-radius: 0 1rem 1rem 0;
+}
+#body_page_default .sidebar a:hover{
+    color: #623ADA;
+    background: #F2F3F6;
+}
+#body_page_default .sidebar a.active{
+    color: #623ADA;
+    background: #EBE4FF;
+}
+#body_page_default .showcase{
+    flex: 1;
+    padding: 1rem;
+}
+
+/*END OF JOB LISTT DISEING*/
 #showcase_sub_list{
     display: flex;
     flex-direction: column;
@@ -685,9 +755,9 @@ form .button_container .button{
 #showcase_sub_list .container .container_body .box .text .name{
     font-size: 1.5rem;
 }
-#showcase_sub_list .container .container_body .box .text .salary_range{
+/*#showcase_sub_list .container .container_body .box .text .salary_range{
     font-size: 1.2rem;
-}
+}*/
 #showcase_sub_list .container .container_body .box .text .posted_at{
     font-size: 1rem;
 }
