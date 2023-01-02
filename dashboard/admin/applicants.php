@@ -82,15 +82,31 @@ if(form("sub")){?>
                                         <div class="field">
                                             <input type="number" name="phone_no" value="<?= $data["phone_no"]  ?>" id="phone_no" placeholder="Contact No." disabled>
                                         </div>
+                                        <label class="label">Summary</label>
+                                         <div class="field">
+                                            <textarea class="form-control" id="message" name="message" disabled><?php echo $data["message"] ?></textarea>
+                                        </div>
                                         <label class="label">Resume</label>
-                                        <button type="button" id="<?php  echo $data["resume"]?>" onclick="showProfId(this.id)"   style="color: white; padding:20PX; background-color: #36344d; padding-left: 30px; padding-right: 30px;border-radius: 10px;">View Resume</button>
+                                        <!-- <button type="button" id="<?php  echo $data["resume"]?>" onclick="showProfId(this.id,'')"   style="color: white; padding:20PX; background-color: #36344d; padding-left: 30px; padding-right: 30px;border-radius: 10px;">View Resume</button> -->
 
-                                        <button class="btn_submit">
-                                            DECLINE
+                                         <button  class="button" data-toggle="tooltip" data-placement="top" title="View" type="button" value="<?= URL_RESUME.  $data["resume"] ?>" id="mybtn<?= $data["applicant_id"] ?>" onclick="showProfId('<?= URL_RESUME.  $data["resume"] ?>', this.id)">
+                                                <i class="fa fa-file-text-o"> &nbsp; </i> VIEW RESUME
                                         </button>
-                                          <button class="btn_submit">
-                                            CONFIRM
-                                        </button>
+                                        <?php
+                                            if($data["status"] == 0 ){
+                                                ?>
+                                                <button type="button" class="btn_submit btn_hired" data-id="<?= $data["applicant_id"] ?>" >
+                                                    CONFIRM
+                                                </button>
+
+                                                <button type="button" class="btn_submit btn_decline" data-id="<?= $data["applicant_id"] ?>">
+                                                    DECLINE
+                                                </button>
+                                                
+                                                <?php
+                                            }
+                                        ?>
+                                        
                                     </form>
                             <?php }elseif($action == "list_applicant"){?>
                                 <?php if(hasResult($list_applicants)){?>
@@ -114,12 +130,12 @@ if(form("sub")){?>
                             <?php }elseif($action == "delete"){?>
                                 <div class="showcase">
                                     <p>
-                                        Delete <?= $data["j_name"] ?> 
+                                        Delete <?= $data["fullname"] ?> 
                                     </p>
                                     <p>
                                         Warning : This action cannot be undone.
                                     </p>
-                                    <button class="btn_delete btn_delete_job" data-id="<?= $applicant_id ?>"> DELETE</button>
+                                    <button class="btn_delete btn_delete_applicant" data-id="<?= $applicant_id ?>"> DELETE</button>
                                 </div>
                             <?php }else{navigate("./?page=applicants&sub=all_list&view=$applicant_id&action=overview");}?>
                         <?php }else{ navigate("./?page=applicants&sub=all_list&view=$applicant_id&action=overview"); }?>
@@ -168,69 +184,106 @@ if(form("sub")){?>
    <!-- The Modal -->
 <style>
 
-    /* The Modal (background) */
     .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 2%; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-    /* Modal Content */
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 40%;
-    }
-    .image_id {
-        margin: 0px auto;
-        width: auto;
-        text-align: center;
-    }
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 1% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 65%; /* Could be more or less, depending on screen size */
+  position: relative;
+  border-radius: 10px;
+}
 
-    /* The Close Button */
-    .close {
-      color: #aaaaaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
 
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+.content {
+   width: 100%;
+   margin: 0px auto;
+}
+
+.embed-container {
+/*   height: 0;*/
+   width: 100%;
+   overflow: hidden;
+   position: relative;
+}
+
+.embed-container iframe {
+   width: 100%;
+
+}
     </style>
+
+
+<!-- modal scroll -->
+<!-- The Modal -->
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close" onclick="closeProfid()">&times;</span>
-    <div class="image_id" id="image_id">
-        <img src="" width="450" id="itemDetail">
+    
+    <div class="content">
+        <div class="embed-container">
+           <iframe src=""  frameborder="0"  onload="resizeIframe(this)" id="documentsDetails"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" loading="lazy" style="height: 1300px;">
+             </iframe>
+       </div>
     </div>
+
   </div>
 
 </div>
 <script type="text/javascript">
-    function showProfId(id){
-        $('#myModal').show();
-        $("img#itemDetail").attr('src' , id);
 
+    function showProfId(documentDetails, getID){
+        // // Get the modal
+         document.getElementById("documentsDetails").src = '';
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        // // Get the button that opens the modal
+        var btn = document.getElementById(getID);
+
+        // // When the user clicks on the button, open the modal
+        document.getElementById("documentsDetails").src = documentDetails;
+        document.getElementById("documentsDetails").style.height = "1363px";
     }
 
     function closeProfid(){
           $('#myModal').hide();
     }
+
+     function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+      }
+
 </script>

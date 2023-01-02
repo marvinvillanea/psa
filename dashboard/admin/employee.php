@@ -22,6 +22,8 @@ if(form("sub") == "all_list" && form("view")){
     }
 }
 
+
+
 if(form("sub")){?>
     <div class="sidebar">
         <a href="?page=employee&sub=all_list" <?= (value("sub") == "all_list") ? 'class="active"' : "" ?>>
@@ -140,25 +142,41 @@ if(form("sub")){?>
                 <div class="container">
                     <div class="container_title">
                         <div class="title">
-                        List of Employee's
+                        Add Employe
                         </div>
                        
                     </div>
                     <div class="container_body">
-                        <form method="post" class="add_employee">
-                            <label class="label">Job Title</label>
+                        <form method="post"  id="employee_add">
+                            <label class="label">First Name</label>
                             <div class="field">
-                                <input type="text" name="title_job"  id="title_job" placeholder="Title name">
+                                <input type="text" name="first_name"  id="first_name" placeholder="First name">
                             </div>
-                            <label class="label">No. of Vacancy</label>
+                            <label class="label">Last Name</label>
                             <div class="field">
-                                <input type="number" name="no_vacancy"  id="no_vacancy" placeholder="No. of Vacancy">
+                                <input type="text" name="last_name"  id="last_name" placeholder="Last name">
                             </div>
+                            <label class="label">Email</label>
                             <div class="field">
-                                <textarea name="description" class="description" id="content" placeholder="Description"></textarea>
+                                <input type="text" name="email"  id="email" placeholder="email">
                             </div>
-                            <button class="btn_submit">
-                                SAVE
+                            <label class="label">Password</label>
+                            <div class="field">
+                                <input type="text" name="password"  id="password" placeholder="Password" value="<?php 
+                                    echo generateRandomString();?>">
+                            </div>
+                            <label class="label">User Type</label>
+                            <div class="field">
+                                <select name="user_type">
+                                    <option selected disabled>--Select User Type--</option>
+                                    <option value="1">HR</option>
+                                    <option value="2">Unit Head</option>
+                                    <option value="4">Employee</option>
+                                    <option value="3">Chief Statistic Specialist</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn_submit employee_add">
+                                ADD
                             </button>
                         </form>
                     </div>

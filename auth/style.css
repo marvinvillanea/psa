@@ -86,7 +86,7 @@ span.company_name{
     border: 1px solid black;
 }
 #main_login .body form label{
-    font-size: .8rem;
+    font-size: 1.5rem;
 }
 #main_login .body form .terms{
     font-size: .8rem;
@@ -116,7 +116,7 @@ span.company_name{
 #main_login .body form button{
     cursor: pointer;
     height: 50px;
-    font-size: 1rem;
+    font-size: 2rem;
     border-radius: 50px;
     background: #008080;
     color: white;

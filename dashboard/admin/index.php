@@ -33,6 +33,7 @@ if($islogin){
     <script src="js/post_job.js" defer></script>
     <script src="js/edit_job.js" defer></script>
     <script src="js/manage_applicants.js" defer></script>
+    <script src="js/manage_employee.js" defer></script>
     <script src="js/update_account.js" defer></script>
     <script src="js/update_general.js" defer></script>
     <script src="js/update_company.js" defer></script>

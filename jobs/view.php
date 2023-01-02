@@ -18,25 +18,12 @@ if(form("id")){
     SELECT
         tbl_jobs.id,
         tbl_jobs.j_number_of_vacancy,
-        tbl_company.id as 'c_id',
-        tbl_company.c_name,
-        tbl_company.c_address,
-        tbl_company.c_cnum,
-        tbl_company.userid,
-        tbl_accounts.firstname,
-        tbl_accounts.lastname,
         tbl_jobs.j_name,
-        tbl_jobs.j_age,
-        tbl_jobs.j_min,
-        tbl_jobs.j_max,
-        tbl_jobs.j_currency_symbol,
         tbl_jobs.j_description,
-        tbl_jobs.j_created_at
+        tbl_jobs.j_created_at,
+        (tbl_jobs.j_number_of_vacancy - (select count(*) from applicants where job_id = tbl_jobs.id and status = '1')) as total_vacancy
     FROM
         tbl_jobs
-    INNER JOIN tbl_company ON tbl_company.userid = tbl_jobs.userid
-    INNER JOIN tbl_accounts ON tbl_accounts.id = tbl_jobs.userid
-
     WHERE
     tbl_jobs.id = $id
     ");
@@ -101,98 +88,99 @@ if(form("id")){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" defer></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./view.css">
     <link rel="stylesheet" href="../verify.css">
     <link rel="stylesheet" href="../header.css">
     <link rel="stylesheet" href="../notify_style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <!-- javascript -->
-    <script src="./js/report_company.js" defer></script>
 </head>
 <body>
     <div class="main">
         <?php include '../header.php' ?>
         <div class="body">
-            <?php if($apply) {?>
-                <?php if($fully_verified){?>
-                    <?php if($already_submited){?>
-                        <div class="box box_success">
-                            <img src="../assets/success2.png" width="300px">
-                            <p>
-                                We already submit your application for this position, The company will notify you.
-                            </p>
-                            <a href="./">BACK</a>
-                        </div>
-                    <?php }else{?>
-                        <div class="box box_success">
-                            <img src="../assets/success2.png" width="300px">
-                            <p>
-                                Your application was successfully submited, The company will notify you.
-                            </p>
-                            <a href="./">BACK</a>
-                        </div>
-                    <?php }?>
-                <?php }else{?>
-                    <div class="box not_verified">
-                        <img src="../assets/fail.png" width="300px">
+              <div class="box job_information">
+                <div class="box_header">
+                    <div class="box_header_title">
+                        <?= $data["j_name"]?>
+                    </div>
+                    <div class="box_header_sub">
                         <p>
-                            Sorry you cannot apply for this job, Your account is not fully verified.
+                            <i class="fa fa-users"></i> Vacancy
+                            <?= $data["j_number_of_vacancy"] ?>
                         </p>
-                        <a href="../profile/?page=general_information&sub=verified">GET VERIFED</a>
-                    </div>
-                <?php }?>
-            
-            <?php }elseif($report){?>
-                <div class="box">
-                    <div class="box_header_title" style="margin-bottom: .5rem">
-                        REPORT COMPANY
-                    </div>
-                    <div class="box_body">
-                        <form class="form frm_report_company" method="post">
-                            <div class="field">
-                                <label for="tb_company_id">Company ID</label>
-                                <input type="text" name="tb_company_id" id="tb_company_id" class="tb" value="<?= $reported_company_id ?>" readonly>
-                            </div>
-                            <div class="field">
-                                <label for="tb_description">Description</label>
-                                <textarea name="tb_description" id="tb_description" class="tb textarea"></textarea>
-                            </div>
-                            <button type="submit">
-                                SUBMIT
-                            </button>
-                        </form>
+                        <p>
+                            <i class="fa fa-calendar"></i>
+                            <?= date("m-d-Y",strtotime($data["j_created_at"]))?>
+                        </p>
                     </div>
                 </div>
-            <?php }else{?>
-            <div class="box job_information">
-                    <div class="box_header">
-                        <div class="box_header_title">
-                            <?= $data["j_name"]?>
-                        </div>
-                        <div class="box_header_sub">
-                            <p>
-                                <i class="fa fa-users"></i> Vacancy
-                                <?= $data["j_number_of_vacancy"] ?>
-                            </p>
-                            <p>
-                                <i class="fa fa-calendar"></i>
-                                <?= date("m-d-Y",strtotime($data["j_created_at"]))?>
-                            </p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="box_body">
-                        <?= $data["j_description"]?>
-                    </div>
-                    <hr>
-                    <div class="box_button">
-                        <a href="?id=<?= $data["id"] ?>&apply=<?= $data["id"] ?>" class="btn_applynow">
-                            <i class="fa fa-file-text-o"></i>
-                            APPLY NOW
-                        </a>
-                    </div>
+                <hr>
+                <div class="box_body">
+                    <?= $data["j_description"]?>
+                </div>
+                <hr>
+                <div class="box_button">
+                     <button data-toggle="modal" data-target="#exampleModal" class="btn_applynow">
+                          <i class="fa fa-file-text-o"></i>
+                        APPLY NOW
+                     </button>
+                       
+                </div>
             </div>
-            <?php }?>
         </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Personal Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <form id="apply_job"  method="post" enctype="multipart/form-data">
+                <input type="hidden" name="job_id" value="<?php echo isset($_GET["id"]) ? $_GET['id'] : '' ?>" readonly>
+          <div class="modal-body">
+              <div class="form-group mb-0">
+                <label for="first_name" class="col-form-label">First Name:</label>
+                <input type="text" class="form-control form-control-sm" id="first_name" placeholder="First Name" name="first_name">
+              </div>
+              <div class="form-group mb-0">
+                <label for="last_name" class="col-form-label">Last Name:</label>
+                <input type="text" class="form-control form-control-sm" id="last_name" placeholder="Last Name" name="last_name">
+              </div>
+              <div class="form-group mb-0">
+                <label for="email" class="col-form-label">Email:</label>
+                <input type="email" class="form-control form-control-sm" id="email" placeholder="Email" name="email">
+              </div>
+              <div class="form-group mb-0">
+                <label for="contact_no" class="col-form-label">Contact NO.</label>
+                <input type="text" class="form-control form-control-sm" id="contact_no" placeholder="Contact NO" name="contact_no">
+              </div>
+              <div class="form-group mb-0">
+                <label for="message" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message" name="message"></textarea>
+              </div>
+              <div class="form-group mb-0">
+                <label for="upload" class="col-form-label">Upload Resume:</label>
+                <input type="file" class="form-control form-control-sm" id="upload" placeholder="Contact NO" name="upload">
+              </div>
+              
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          </form>
+        </div>
+      </div>
     </div>
 </body>
 </html>
@@ -219,4 +207,43 @@ function updateNotification(id){
         }
     });
 }
+
+$(document).ready(() => {
+    $("#apply_job").on("submit",(e) => {
+        e.preventDefault();
+        
+        // var data = $('#apply_job').serializeArray()
+        // var data = new FormData(this);
+        const form = document.getElementById('apply_job');
+        const formData = new FormData(form);
+
+        $.ajax({
+            url : "./routes/apply_job.php",
+            type: "post",
+            data:  formData,
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: (res) => {
+                console.log(res)
+                if(res.success){
+                    Swal.fire(
+                        'Success',
+                        `${res.message}`,
+                        'success'
+                    ) 
+                    setTimeout(() => {
+                        window.location.href="./?page=resume"
+                    }, 1000);
+                }else{
+                    Swal.fire(
+                        'Failed',
+                        `${res.message}`,
+                        'error'
+                    )
+                }
+            }
+        });
+    });
+});
 </script>

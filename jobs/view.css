@@ -58,6 +58,7 @@ button{
 }
 .navigation > a:hover{
     color: rgb(163, 163, 163);
+    text-decoration: none;
 }
 .navigation > a.nav_a{
     border-radius: 2rem;

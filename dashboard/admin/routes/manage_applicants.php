@@ -20,7 +20,7 @@ if($islogin){
     $id = mysqli_value($con,"id");
     $action = mysqli_value($con,"action");
 
-    $update_status = mysqli_query($con,"UPDATE `tbl_applicants` SET `status` = $action WHERE `tbl_applicants`.`id` = $id");
+    $update_status = mysqli_query($con,"UPDATE `applicants` SET `status` = $action WHERE `applicant_id` = $id");
     if($update_status){
         message(true,"Successfully updated.");
     }else{

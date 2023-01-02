@@ -33,13 +33,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $save_query = mysqli_query($con,"
     INSERT INTO `tbl_jobs`(
-        `userid`,
         `j_name`,
         `j_number_of_vacancy`,
         `j_description`
     )
     VALUES(
-        $u_id,
         '$title_job',
         '$no_vacancy',
         '$description'
